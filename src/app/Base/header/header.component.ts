@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { LeftSidebarComponent } from '../left-sidebar/left-sidebar.component';
@@ -26,7 +26,13 @@ export class HeaderComponent implements OnInit{
   companyName = '31 INCORPORATED';
   companyId = 4610743;
   isMenuOpen :boolean = false;
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog,private el: ElementRef) {}
+  @HostListener('document:click', ['$event'])
+  onBodyClick(event: Event): void {
+    if (!this.el.nativeElement.contains(event.target)) {
+      this.isMenuOpen = false;
+    }
+  }
   ngOnInit(): void {
     
   }
