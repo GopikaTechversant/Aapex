@@ -1,17 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { NgIf } from '@angular/common';
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [NgIf],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrl: './header.component.css',
+  host: {
+    '(document:click)': 'onBodyClick($event)'
+  }
 })
 export class HeaderComponent implements OnInit{
   companyName = '31 INCORPORATED';
   companyId = 4610743;
   isMenuOpen :boolean = false;
-  constructor(){}
+  constructor(private el: ElementRef){}
+  @HostListener('document:click', ['$event'])
+  onBodyClick(event: Event): void {
+    if (!this.el.nativeElement.contains(event.target)) {
+      this.isMenuOpen = false;
+    }
+  }
   ngOnInit(): void {
     
   }

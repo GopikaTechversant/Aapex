@@ -2,17 +2,20 @@
     <div class="logo-info">
         <img src="/assets/images/hamburger_menu.png" alt="" width="30px" class="hamberger-icon">
         <img src="/assets/images/logo.png" alt="" height="40px" width="48px" class="logo p-t-3">
-        <div class="title"><span class="f-s-19 appex-scan">AAPEX SCAN</span><span class="p-l-7 f-w-300">|</span> <span
-                class="p-l-7">AAPEX and the SEMA Show 2024 </span></div>
+        <div class="title"><span class="f-s-19 appex-scan">AAPEX SCAN</span><span class="p-l-7 f-w-300">|</span>
+            <span class="p-l-7 title-text-right">AAPEX and the SEMA Show 2024 </span>
+        </div>
     </div>
     <div class="user-info">
         <div class="user-dropdown">
             <div class="company-menu">
-                <button class="company-button" (click)="toggleMenu()">
-                    {{ companyName }} ({{ companyId }})
-                    <span class="arrow">&#x25BC;</span>
-                </button>
-
+                <div class="d-flex a-center">
+                    <div class="company-button m-t-3" (click)="toggleMenu()">
+                        {{ companyName }} ({{ companyId }})
+                        <span class="p-l-14"><i class="f-right fa fa-chevron-down"></i></span>
+                    </div>
+                    <div class="company-avatar-header m-t-13 c-pointer" (click)="toggleMenu()">{{ companyNameInitials }}</div>
+                </div>
                 <div class="dropdown" *ngIf="isMenuOpen">
                     <div class="company-info">
                         <div class="company-avatar">{{ companyNameInitials }}</div>
