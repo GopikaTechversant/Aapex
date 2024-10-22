@@ -1,0 +1,42 @@
+<div class="main container-fluid w-100">
+    <div class="logo-info">
+        <img src="/assets/images/hamburger_menu.png" alt="" width="30px" class="hamberger-icon">
+        <img src="/assets/images/logo.png" alt="" height="40px" width="48px" class="logo p-t-3">
+        <div class="title"><span class="f-s-19 appex-scan">AAPEX SCAN</span><span class="p-l-7 f-w-300">|</span> <span
+                class="p-l-7">AAPEX and the SEMA Show 2024 </span></div>
+    </div>
+    <div class="user-info">
+        <div class="user-dropdown">
+            <div class="company-menu">
+                <button class="company-button" (click)="toggleMenu()">
+                    {{ companyName }} ({{ companyId }})
+                    <span class="arrow">&#x25BC;</span>
+                </button>
+
+                <div class="dropdown" *ngIf="isMenuOpen">
+                    <div class="company-info">
+                        <div class="company-avatar">{{ companyNameInitials }}</div>
+                        <div class="company-text">
+                            <strong>{{ companyName }} ({{ companyId }})</strong>
+                        </div>
+                    </div>
+                    <div class="divider">
+                        <div></div>
+                    </div>
+
+                    <div class="menu-options">
+                        <div class="menu-item" (click)="switchCompany()">
+                            <img src="/assets/images/switch-company.png" alt="" height="24px" width="24px"
+                                class="c-pointer">
+                            <span class="p-l-10 c-pointer"> Switch Company</span>
+                        </div>
+                        <div class="menu-item p-l-4" (click)="logout()">
+                            <img src="/assets/images/logout.svg" alt="" height="17px" width="17px" class="c-pointer">
+                            <span class="p-l-14 c-pointer"> Logout</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
