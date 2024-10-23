@@ -3,10 +3,11 @@ import { NgIf } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { LeftSidebarComponent } from '../left-sidebar/left-sidebar.component';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { SwitchCompanyComponent } from '../../Feature/switch-company/switch-company.component';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [NgIf],
+  imports: [NgIf,SwitchCompanyComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
   animations: [
@@ -48,10 +49,6 @@ export class HeaderComponent implements OnInit{
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  switchCompany() {
-    console.log('Switch company clicked');
-  }
-
   logout() {
     console.log('Logout clicked');
   }
@@ -63,4 +60,9 @@ export class HeaderComponent implements OnInit{
       panelClass: 'custom-dialog'
     });
   }
+  switchCompany(){const dialogRef = this.dialog.open(SwitchCompanyComponent, {
+    width: '500px',
+    height: '600px',
+    panelClass: 'custom-dialog'
+  });}
 }

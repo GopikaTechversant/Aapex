@@ -1,0 +1,32 @@
+<div class="company-modal">
+  <div class="search-bar">
+    <input type="text" placeholder="Search company name and reg id" />
+    <button type="button">
+      <img class="search-image" src="../../../assets/images/search.png" />
+    </button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Org ID / Reg ID</th>
+        <th class="action">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let company of company_list">
+        <td>{{ company.name }}</td>
+        <td>
+          <select>
+            <option>{{ company.reg_Id }}</option>
+            <!-- Corrected here -->
+          </select>
+        </td>
+        <td class="action">
+          <img [src]="company.action" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

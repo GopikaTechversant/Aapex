@@ -1,0 +1,57 @@
+body {
+  font-family: Arial, sans-serif;
+}
+.company-modal {
+  margin: 20px;
+}
+.search-bar {
+  display: flex;
+  margin-bottom: 20px;
+  height: 35px;
+}
+.search-bar input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid rgb(184, 182, 182);
+}
+.search-bar button {
+  border: none;
+  background-color: #4b7bc3;
+  color: white;
+  cursor: pointer;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th,
+td {
+  padding: 15px;
+  text-align: left;
+}
+th {
+  border-bottom: 1px solid #ddd;
+}
+select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.action {
+  text-align: right;
+}
+.action button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #007bff;
+}
+.action button:hover {
+  color: #0056b3;
+}
+.search-image {
+  height: 20px;
+}
