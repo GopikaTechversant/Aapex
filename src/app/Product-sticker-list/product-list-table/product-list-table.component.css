@@ -1,6 +1,7 @@
 .product-table-container {
     padding: 20px;
     overflow-x: auto;
+    width: 100%;
 }
 
 .product-table {
@@ -78,14 +79,14 @@ td {
 
 .ready-label {
     display: inline-block;
-    padding: 7px 0px;
+    padding: 5px 19px;
     background-color: #d8fbec;
     color: #276350;
     border-radius: 5px;
-    /* font-size: 12px; */
     font-weight: 600;
     gap: 3px;
     justify-content: center;
+    height: 32px;
 }
 
 .actions-column {
@@ -134,4 +135,8 @@ td {
 
 .action-box{
     gap: 6px;
+}
+
+.check-box{
+    gap: 3px;
 }

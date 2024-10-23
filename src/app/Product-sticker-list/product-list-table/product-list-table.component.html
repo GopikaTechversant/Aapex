@@ -2,24 +2,18 @@
     <table class="product-table">
         <thead>
             <tr>
-                <th>
-                    All
-                    <input type="checkbox" />
-
-                </th>
+                <!-- <th>All <span class="p-l-4 p-t-2"><input type="checkbox" /></span></th> -->
+                 <th class="d-flex check-box"><span>All</span><input type="checkbox" /></th>
                 <th>No.</th>
                 <th class="text-center">QR CODE</th>
                 <th class="text-left">CONTENT</th>
                 <th>NEW PRODUCT SHOWCASE <span>(1 ENTRY)</span></th>
-                <th></th>
                 <th>ACTION</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let product of products_list; let i = index">
-                <td>
-                    <input type="checkbox" />
-                </td>
+                <td><input type="checkbox" /></td>
                 <td>{{ i + 1 | number: '2.0' }}</td>
                 <td>
                     <div class="d-flex product-content">
@@ -46,15 +40,18 @@
                         </div>
                     </div>
                 </td>
-                <td>
+                <td class="">
+                    <div class="d-flex j-space align-center">
                     <div class="d-flex">
                         <input type="checkbox" />
                         <span class="product-showcase">New Product Showcase</span>
                     </div>
+                    <div class="status-label ready-label d-flex">
+                        <img src="/assets/images/ready_icon.svg" alt="" height="20px" width="20px">
+                        <span>Ready for use</span>
+                    </div>
+                </div>
                 </td>
-                <td class="text-center"><span class="status-label ready-label d-flex">
-                    <img src="/assets/images/ready_icon.svg" alt="" height="20px" width="20px">
-                    <span>Ready for use</span></span></td>
                 <td>
                     <div class="d-flex action-column">
                         <span class="d-flex action-box"><img src="/assets/images/print_icon.svg" alt="" height="20px"
