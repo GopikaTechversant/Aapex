@@ -7,10 +7,12 @@
       </div>
       <div (click)="close()" class="c-pointer"><img src="/assets/images/close-icon-white.png" alt="" width="19"></div>
     </div>
-    <form (ngSubmit)="onSubmit()" class="d-flex f-column form-section m-l-10">
+    <form (ngSubmit)="onSubmit()" class="form-container">
+      <div *ngIf="selectedType === 'printAll'" class="p-l-20 d-flex align-center nps-checkbox"><span class="f-w-600">NPS Only </span><input type="checkbox"></div>
+      <div class="d-flex f-column form-section m-l-10 align-center">
       <div *ngIf="selectedType === 'download'">
         <label [class.active]="selectedFormat === 'svg'" class="d-flex align-center">
-          <input type="radio" name="format" value="svg" [(ngModel)]="selectedFormat" />
+          <input type="radio" name="format" value="svg" [(ngModel)]="selectedFormat"/>
           <span class="p-l-4">SVG</span>
         </label>
       </div>
@@ -20,19 +22,20 @@
           <span class="p-l-4">JPEG</span>
         </label>
       </div>
-      <div *ngIf="selectedType === 'print'">
+      <div *ngIf="selectedType === 'print' || selectedType === 'printAll'">
         <label [class.active]="selectedFormat === '2X2'" class="d-flex align-center">
           <input type="radio" name="format" value="2X2" [(ngModel)]="selectedFormat" />
           <span class="p-l-4">2X2 Format</span>
         </label>
       </div>
-      <div *ngIf="selectedType === 'print'">
+      <div *ngIf="selectedType === 'print' || selectedType === 'printAll'">
         <label [class.active]="selectedFormat === '5x7'" class="d-flex align-center">
           <input type="radio" name="format" value="5x7" [(ngModel)]="selectedFormat" />
           <span class="p-l-4">5x7 Format</span>
         </label>
       </div>
       <button type="submit" class="submit-button c-pointer m-t-20">Submit</button>
+    </div>
     </form>
   </div>
 </div>

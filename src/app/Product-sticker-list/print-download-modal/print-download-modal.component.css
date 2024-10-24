@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 32px;
+  gap: 22px;
 }
 
 .title{
@@ -20,6 +20,7 @@
 
 .form-section{
   gap: 10px;
+  
 }
 
 .submit-button{
@@ -38,4 +39,17 @@ input[type="radio"] {
 
 label.active {
   color: #0060c4;
+}
+
+.form-container{
+  width: 100%;
+}
+
+input[type="checkbox"] {
+  outline: none;
+  box-shadow: none;
+}
+
+.nps-checkbox{
+  gap: 4px;
 }
