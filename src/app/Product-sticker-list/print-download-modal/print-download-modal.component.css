@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 32px;
+  gap: 22px;
 }
 
 .title{
@@ -20,6 +20,7 @@
 
 .form-section{
   gap: 10px;
+  
 }
 
 .submit-button{
@@ -27,11 +28,28 @@
     background: #189b69;
     border-radius: 4px;
     padding: 3px;
-    width: 72px;
+    width: 91px;
     color: white;
 }
 
 input[type="radio"] {
   outline: none;
   box-shadow: none;
+}
+
+label.active {
+  color: #0060c4;
+}
+
+.form-container{
+  width: 100%;
+}
+
+input[type="checkbox"] {
+  outline: none;
+  box-shadow: none;
+}
+
+.nps-checkbox{
+  gap: 4px;
 }

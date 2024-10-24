@@ -28,10 +28,11 @@ export class ProductListTableComponent implements OnInit{
     
   }
 
-  printDownloadProductModal():void{
+  printDownloadProductModal(selectedType:any):void{
     const dialogRef = this.dialog.open(PrintDownloadModalComponent, {
       width: '500px',
-      height: '170px',
+      height: '200px',
+      data:selectedType
     });
   }
 
