@@ -8,19 +8,31 @@
       <div (click)="close()" class="c-pointer"><img src="/assets/images/close-icon-white.png" alt="" width="19"></div>
     </div>
     <form (ngSubmit)="onSubmit()" class="d-flex f-column form-section m-l-10">
-      <div>
-        <label>
+      <div *ngIf="selectedType === 'download'">
+        <label [class.active]="selectedFormat === 'svg'" class="d-flex align-center">
           <input type="radio" name="format" value="svg" [(ngModel)]="selectedFormat" />
-          SVG
+          <span class="p-l-4">SVG</span>
         </label>
       </div>
-      <div>
-        <label>
+      <div *ngIf="selectedType === 'download'">
+        <label [class.active]="selectedFormat === 'jpeg'" class="d-flex align-center">
           <input type="radio" name="format" value="jpeg" [(ngModel)]="selectedFormat" />
-          JPEG
+          <span class="p-l-4">JPEG</span>
         </label>
       </div>
-      <button type="submit" class="submit-button c-pointer">Submit</button>
+      <div *ngIf="selectedType === 'print'">
+        <label [class.active]="selectedFormat === '2X2'" class="d-flex align-center">
+          <input type="radio" name="format" value="2X2" [(ngModel)]="selectedFormat" />
+          <span class="p-l-4">2X2 Format</span>
+        </label>
+      </div>
+      <div *ngIf="selectedType === 'print'">
+        <label [class.active]="selectedFormat === '5x7'" class="d-flex align-center">
+          <input type="radio" name="format" value="5x7" [(ngModel)]="selectedFormat" />
+          <span class="p-l-4">5x7 Format</span>
+        </label>
+      </div>
+      <button type="submit" class="submit-button c-pointer m-t-20">Submit</button>
     </form>
   </div>
 </div>

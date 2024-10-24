@@ -27,11 +27,15 @@
     background: #189b69;
     border-radius: 4px;
     padding: 3px;
-    width: 72px;
+    width: 91px;
     color: white;
 }
 
 input[type="radio"] {
   outline: none;
   box-shadow: none;
+}
+
+label.active {
+  color: #0060c4;
 }
