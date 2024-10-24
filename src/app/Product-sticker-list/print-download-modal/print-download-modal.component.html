@@ -1,0 +1,26 @@
+<div class="main">
+  <div class="content">
+    <div class="title p-t-7 p-l-16 ">
+      <div>
+        <img src="/assets/images/info_icon.png" alt="">
+        <span class="p-l-5">Please choose the display format</span>
+      </div>
+      <div (click)="close()" class="c-pointer"><img src="/assets/images/close-icon-white.png" alt="" width="19"></div>
+    </div>
+    <form (ngSubmit)="onSubmit()" class="d-flex f-column form-section m-l-10">
+      <div>
+        <label>
+          <input type="radio" name="format" value="svg" [(ngModel)]="selectedFormat" />
+          SVG
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="radio" name="format" value="jpeg" [(ngModel)]="selectedFormat" />
+          JPEG
+        </label>
+      </div>
+      <button type="submit" class="submit-button c-pointer">Submit</button>
+    </form>
+  </div>
+</div>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { PrintDownloadModalComponent } from '../print-download-modal/print-download-modal.component';
 @Component({
   selector: 'app-product-list-table',
   standalone: true,
@@ -21,9 +23,21 @@ export class ProductListTableComponent implements OnInit{
       total_files:0
     }
   ]
-  constructor(){}
+  constructor(private dialog: MatDialog){}
   ngOnInit(): void {
     
   }
+
+  printDownloadProductModal():void{
+    const dialogRef = this.dialog.open(PrintDownloadModalComponent, {
+      width: '500px',
+      height: '170px',
+    });
+  }
+
+  editProduct():void{
+
+  }
+  
 
 }
