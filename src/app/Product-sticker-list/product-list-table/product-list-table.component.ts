@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PrintDownloadModalComponent } from '../print-download-modal/print-download-modal.component';
+import { AddQrContentModalComponent } from '../add-qr-content-modal/add-qr-content-modal.component';
 @Component({
   selector: 'app-product-list-table',
   standalone: true,
@@ -57,6 +58,12 @@ export class ProductListTableComponent implements OnInit{
   editProduct():void{
 
   }
-  
+
+  addQrContentModal():void{
+    const dialogRef = this.dialog.open(AddQrContentModalComponent, {
+      width: '420px',
+      height: '110px'
+    })
+  }
 
 }

@@ -1,0 +1,34 @@
+.main{
+    gap: 16px;
+}
+
+.title{
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.arrow-green{
+    color: #28f5c9;
+}
+
+.arrow:hover{
+    border: none;
+    border-radius: 16px;
+    width: 34px;
+    height: 34px;
+    outline: none;
+    background-color: rgb(119 117 117 / 9%);
+}
+
+.arrow{
+    border: none;
+    outline: none;
+    background-color: white;
+   
+}
+
+.content{
+    height: 42px;
+    align-items: center;
+}
