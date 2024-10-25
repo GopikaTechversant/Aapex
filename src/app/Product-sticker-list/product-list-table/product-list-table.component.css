@@ -149,3 +149,47 @@ td {
 .qr-head{
     width: 189px;
 }
+
+.no-product{
+    width: 92px;
+    height: 95px;
+    background-color: #8f868617;
+}
+
+.no-content-text{
+    font-weight: 600;
+}
+
+.no-product-action-column{
+    width: 170px;
+    align-items: center;
+    padding: 5px;
+    justify-content: space-around;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+}
+
+.action{
+    width: 25%;
+}
+
+.incomplete-label {
+    display: inline-block;
+    padding: 5px 19px;
+    background-color: #d7b8bc59;
+    color: #9a1b1f;
+    border-radius: 5px;
+    font-weight: 600;
+    gap: 3px;
+    justify-content: center;
+    height: 32px;
+}
+
+.no-product-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 92px; 
+    width: 92px; 
+    background-color: #8f868617;
+}

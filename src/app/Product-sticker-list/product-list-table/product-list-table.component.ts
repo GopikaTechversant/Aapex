@@ -15,13 +15,31 @@ export class ProductListTableComponent implements OnInit{
     {
       name: 'test product copy',
       code: 'XQNF-08-055-23',
-      // image: 'assets/images/product1.png',
+      product_image: 'assets/images/product1.png',
       // qrCode: 'assets/images/qr1.png',
       lastUpdated: 'Oct 14, 2024',
       total_images:2,
       total_videos:3,
       total_files:0
+    },
+    {
+      name: '',
+      code: '',
+      product_image: '',
+      // qrCode: 'assets/images/qr1.png',
+      lastUpdated: 'Oct 14, 2024',
+    },
+    {
+      name: 'test product copy',
+      code: 'XQNF-08-055-23',
+      product_image: 'assets/images/product1.png',
+      // qrCode: 'assets/images/qr1.png',
+      lastUpdated: 'Oct 14, 2024',
+      total_images:0,
+      total_videos:0,
+      total_files:0
     }
+
   ]
   constructor(private dialog: MatDialog){}
   ngOnInit(): void {
