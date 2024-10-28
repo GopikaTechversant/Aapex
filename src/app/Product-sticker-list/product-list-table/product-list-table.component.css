@@ -1,5 +1,4 @@
 .product-table-container {
-    /* padding: 20px; */
     overflow-x: auto;
     width: 100%;
     padding: 0 4rem;
@@ -42,23 +41,20 @@ td {
 
 .content-column {
     display: flex;
-    /* align-items: center; */
     gap: 10px;
 }
 
-/* .product-image {
-    width: 60px;
-    height: auto;
-    border-radius: 5px;
-} */
  tr{
     border-bottom: 1px solid #ddd;
  }
 
+ 
 .product-info {
     display: flex;
     flex-direction: column;
     gap: 6px;
+    min-width: 150px;
+
 }
 
 .badge {
@@ -154,6 +150,9 @@ td {
     width: 92px;
     height: 95px;
     background-color: #8f868617;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .no-content-text{
@@ -192,4 +191,10 @@ td {
     height: 92px; 
     width: 92px; 
     background-color: #8f868617;
+    min-width: 92px;
+    object-fit: contain;
+    min-width: 92px;
+    min-height: 92px;
 }
+
+
