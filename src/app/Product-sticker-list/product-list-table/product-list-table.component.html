@@ -1,14 +1,14 @@
-<div class="product-table-container">
+<div class="product-table-container m-t-20">
     <table class="product-table">
         <thead>
             <tr>
                 <!-- <th>All <span class="p-l-4 p-t-2"><input type="checkbox" /></span></th> -->
                 <th class="d-flex check-box"><span>All</span><input type="checkbox" /></th>
                 <th>No.</th>
-                <th class="text-center">QR CODE</th>
+                <th class="text-center qr-head">QR CODE</th>
                 <th class="text-left">CONTENT</th>
-                <th>NEW PRODUCT SHOWCASE <span>(1 ENTRY)</span></th>
-                <th>ACTION</th>
+                <th class="new-product-showcase">NEW PRODUCT SHOWCASE <span>(1 ENTRY)</span></th>
+                <th class="action">ACTION</th>
             </tr>
         </thead>
         <tbody>
@@ -18,11 +18,14 @@
                 <td>
                     <div class="d-flex product-content">
                         <img src="/assets/images/dummy_qr.svg" alt="QR Code" class="qr-code" />
-                        <span class="content-button">Product Content</span>
+                        <span *ngIf="product.product_image !== ''" class="content-button">Product Content</span>
                     </div>
                 </td>
-                <td class="content-column ">
-                    <img src="/assets/images/product-sample.png" alt="Product Image" height="95" width="106" />
+                <td class="content-column " *ngIf="product.product_image !== ''">
+                    <img src="/assets/images/product-sample.png" alt="Product Image" height="95" width="92"
+                        *ngIf="product.total_images !== 0 " />
+                    <div *ngIf="product.total_images == 0 " class="no-product-info"><img
+                            src="/assets/images/info-icon-grey.png" alt="" width="24px" height="24px"></div>
                     <div class="product-info">
                         <span class="product-name">{{ product.name }}</span>
                         <div class="d-flex image-count">
@@ -40,30 +43,46 @@
                         </div>
                     </div>
                 </td>
+                <td class="content-column align-center" *ngIf="product.product_image === ''">
+                    <div class="no-product"></div>
+                    <div class="no-content-text">No Content Added</div>
+
+                </td>
                 <td class="">
-                    <div class="d-flex j-space align-center">
+                    <div *ngIf="product.product_image !== ''" class="d-flex j-space align-center">
                         <div class="d-flex">
                             <input type="checkbox" />
                             <span class="product-showcase">New Product Showcase</span>
                         </div>
-                        <div class="status-label ready-label d-flex">
+                        <div class="status-label ready-label d-flex" *ngIf="product.total_images !== 0 ">
                             <img src="/assets/images/ready_icon.svg" alt="" height="20px" width="20px">
                             <span>Ready for use</span>
+                        </div>
+                        <div class="status-label incomplete-label d-flex" *ngIf="product.total_images == 0 ">
+                            <img src="/assets/images/incomplete_icon.svg" alt="" height="20px" width="20px">
+                            <span>incomplete</span>
                         </div>
                     </div>
                 </td>
                 <td>
-                    <div class="d-flex action-column">
+                    <div class="d-flex action-column" *ngIf="product.product_image !== ''">
                         <!-- <app-print-download></app-print-download>
                         <app-edit-product></app-edit-product> -->
-                        <span class="d-flex action-box" (click)="printDownloadProductModal('print')"><img src="/assets/images/print_icon.svg" alt="" height="20px"
-                                width="20px"><span>Print</span>
+                        <span class="d-flex action-box c-pointer" (click)="printDownloadProductModal('print')"><img
+                                src="/assets/images/print_icon.svg" alt="" height="20px" width="20px"><span>Print</span>
                         </span>
-                        <span class="d-flex action-box" (click)="printDownloadProductModal('download')"><img src="/assets/images/download_icon.svg" alt="" height="20px"
-                                width="20px"><span>Download QR</span>
+                        <span class="d-flex action-box c-pointer" (click)="printDownloadProductModal('download')"><img
+                                src="/assets/images/download_icon.svg" alt="" height="20px" width="20px"><span>Download
+                                QR</span>
                         </span>
-                        <span class="d-flex action-box" (click)="editProduct()"><img src="/assets/images/edit_icon.svg" alt="" height="20px"
-                                width="20px"><span>Edit</span></span>
+                        <span class="d-flex action-box c-pointer" (click)="editProduct()"><img src="/assets/images/edit_icon.svg"
+                                alt="" height="20px" width="20px"><span>Edit</span></span>
+                    </div>
+                    <div class="d-flex j-end">
+                        <div class="no-product-action-column d-flex c-pointer" *ngIf="product.product_image === ''" (click)="addQrContentModal()">
+                            <span>Add QR Content</span>
+                            <img src="/assets/images/add_icon.svg" alt="" width="19px" height="19px">
+                        </div>
                     </div>
                 </td>
             </tr>

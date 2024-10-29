@@ -10,7 +10,7 @@
       <li class="sidebar-item" [ngClass]="{'active': selectedItem === 'productList'}" (click)="selectItem('productList')">
         <img src="../../../assets/images/sticker_list.png" class="sidebar-icon"> Product List
       </li>
-      <li class="sidebar-item" [ngClass]="{'active': selectedItem === 'printAll'}" (click)="selectItem('printAll')">
+      <li class="sidebar-item" [ngClass]="{'active': selectedItem === 'printAll'}" (click)="printDownloadProductModal('printAll')">
         <img src="../../../assets/images/downloadIcon.png" class="sidebar-icon"> Print All
       </li>
       <li class="sidebar-item" [ngClass]="{'active': selectedItem === 'contactUs'}" (click)="selectItem('contactUs')">
