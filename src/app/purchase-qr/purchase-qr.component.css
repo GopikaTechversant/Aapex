@@ -1,0 +1,40 @@
+.purchase-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.purchase-qr-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+.office-hours {
+  padding: 10px 0;
+}
+.purchase-container-inner {
+  display: flex;
+}
+.purchaseQR-close-button {
+  background-color: #3f83f8;
+  width: 90px;
+  height: 30px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+.purchaseQR-phone-icon {
+  padding-right: 10px;
+}
+.purchaseQR-phone-icon span {
+  padding-right: 10px;
+}
+.purchaseQR-email-icon {
+  padding-right: 10px;
+}
+.purchase-container-icon {
+  width: 20px;
+}
+.purchaseQR-email-icon span {
+  padding-right: 10px;
+}
