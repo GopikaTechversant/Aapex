@@ -1,3 +1,13 @@
+.welcome-container-top {
+  color: #9e9999;
+}
+.welcome-container-list {
+  color: #9e9999;
+  line-height: 30px;
+}
+.welcome-highlight {
+  color: rgb(46, 46, 46);
+}
 .welcome-container {
   display: flex;
   justify-content: space-between;

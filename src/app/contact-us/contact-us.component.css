@@ -1,0 +1,23 @@
+.contact-icon {
+  width: 20px;
+  height: 20px;
+}
+.contact-icon img {
+  width: 100%;
+  height: 100%;
+}
+.contact-details {
+  display: flex;
+}
+.contact-outer-container {
+  display: flex;
+}
+.contact-container {
+  margin: 0 auto;
+  background-color: rgb(249, 243, 243);
+  padding: 50px;
+  height: 100vh;
+}
+.contact-detail-text {
+  padding-left: 20px;
+}

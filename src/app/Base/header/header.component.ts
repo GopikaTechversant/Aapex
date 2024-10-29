@@ -2,26 +2,14 @@ import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { LeftSidebarComponent } from '../left-sidebar/left-sidebar.component';
-import { trigger, state, style, transition, animate } from '@angular/animations';
-import { SwitchCompanyComponent } from '../../Feature/switch-company/switch-company.component';
+import { SwitchCompanyComponent } from '../../switch-company/switch-company.component';
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [NgIf,SwitchCompanyComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
-  animations: [
-    trigger('slideInFromLeft', [
-      state('void', style({ transform: 'translateX(-100%)' })),
-      state('*', style({ transform: 'translateX(0)' })),
-      transition(':enter', [
-        animate('300ms ease-in')
-      ]),
-      transition(':leave', [
-        animate('300ms ease-out', style({ transform: 'translateX(100%)' }))
-      ])
-    ])
-  ]
+ 
 })
 export class HeaderComponent implements OnInit{
   companyName = '31 INCORPORATED';
@@ -54,15 +42,17 @@ export class HeaderComponent implements OnInit{
   }
   openModal() {
     const dialogRef = this.dialog.open(LeftSidebarComponent, {
-      width: '320px',
+      width: '380px',
       height: '100vh',
       position: { left: '0px', top: '0px' },
       panelClass: 'custom-dialog'
     });
   }
   switchCompany(){const dialogRef = this.dialog.open(SwitchCompanyComponent, {
-    width: '500px',
-    height: '600px',
+    width: '800px',
+    height: '450px',
     panelClass: 'custom-dialog'
-  });}
+  });
+  this.isMenuOpen = !this.isMenuOpen;
+}
 }

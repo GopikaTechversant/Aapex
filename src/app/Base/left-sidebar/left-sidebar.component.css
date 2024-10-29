@@ -30,7 +30,6 @@
     cursor: pointer;
     border-radius: 10px;
     margin-bottom: 10px;
-    transition: background-color 0.3s;
   }
   
   .sidebar-item:hover {
