@@ -21,10 +21,6 @@ td {
     padding: 10px 6px;
 }
 
-/* td {
-    text-align: center;
-} */
-
 .content-button {
     background-color: #e1edfe;
     border: none;
@@ -44,11 +40,11 @@ td {
     gap: 10px;
 }
 
- tr{
+tr {
     border-bottom: 1px solid #ddd;
- }
+}
 
- 
+
 .product-info {
     display: flex;
     flex-direction: column;
@@ -67,7 +63,7 @@ td {
     margin-right: 10px;
 }
 
-.product-showcase{
+.product-showcase {
     display: inline-block;
     padding: 3px 8px;
     width: 110px;
@@ -109,57 +105,58 @@ td {
     align-items: center;
 }
 
-.image-count-box{
+.image-count-box {
     border: 1px solid #ddd;
     justify-content: space-around;
     width: 36px;
     border-radius: 5px;
 }
 
-.image-count{
+.image-count {
     gap: 10px;
 }
 
-.action-column{
+.action-column {
     gap: 12px;
 }
 
-.product-name{
+.product-name {
     display: inline-block;
-    font-size: 16px;
-    font-weight:bolder !important;
+    font-size: 15px;
+    font-weight: bolder !important;
 }
 
-.action-box{
+.action-box {
     gap: 6px;
 }
 
-.check-box{
+.check-box {
     gap: 3px;
 }
 
-.new-product-showcase{
+.new-product-showcase {
     width: 448px;
 }
 
-.qr-head{
+.qr-head {
     width: 189px;
 }
 
-.no-product{
+.no-product {
     width: 92px;
     height: 95px;
-    background-color: #8f868617;
+    background-color: #f3f4f6;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 11px;
 }
 
-.no-content-text{
+.no-content-text {
     font-weight: 600;
 }
 
-.no-product-action-column{
+.no-product-action-column {
     width: 170px;
     align-items: center;
     padding: 5px;
@@ -168,7 +165,7 @@ td {
     border: 1px solid #ddd;
 }
 
-.action{
+.action {
     width: 25%;
 }
 
@@ -184,17 +181,50 @@ td {
     height: 32px;
 }
 
-.no-product-info{
+.no-product-info {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 92px; 
-    width: 92px; 
-    background-color: #8f868617;
+    height: 98px;
+    width: 92px;
+    background-color: #f3f4f6;
     min-width: 92px;
     object-fit: contain;
     min-width: 92px;
     min-height: 92px;
+    border-radius: 11px;
+}
+
+.table-footer {
+    gap: 5px;
+    width: 100%;
+    padding: 0 4rem;
+}
+
+.footer-text {
+    color: #c71c23;
+}
+
+.text-product-details {
+    color: #616468;
+    font-size: 13px;
+    min-width: 164px;
 }
 
 
+@media (min-width: 1200px) and (max-width: 1300px) {
+    .product-table-container {
+        overflow-x: auto;
+        width: 100%;
+        padding: 0 3rem;
+    }
+
+    tr {
+        font-size: 13px;
+    }
+
+    .showcase-column {
+        min-width: 200px;
+        min-width: 336px;
+    }
+}

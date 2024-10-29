@@ -23,7 +23,7 @@
                 </td>
                 <td class="content-column " *ngIf="product.product_image !== ''">
                     <div class="no-product-info">
-                        <img src="/assets/images/info-icon-grey.png" alt="" width="24px" height="24px"
+                        <img src="/assets/images/warning-icon.png" alt="" width="24px" height="24px"
                             *ngIf="product.total_images == 0 ">
                         <img src="/assets/images/product-sample.png" alt="Product Image" height="95px" width="92px"
                             *ngIf="product.total_images !== 0 " />
@@ -39,7 +39,7 @@
                             <div class="image-count-box d-flex"><img src="/assets/images/file_icon.svg"><span>1</span>
                             </div>
                         </div>
-                        <div class="d-flex f-column m-t-4">
+                        <div class="d-flex f-column m-t-4 text-product-details">
                             <span><i>{{ product.code }}</i></span>
                             <span><i>Last updated: {{ product.lastUpdated }}</i></span>
                         </div>
@@ -50,7 +50,7 @@
                     <div class="no-content-text">No Content Added</div>
 
                 </td>
-                <td class="">
+                <td class="showcase-column">
                     <div class="d-flex j-space align-center">
                         <div class="d-flex">
                             <input type="checkbox" />
@@ -64,7 +64,8 @@
                         </div>
                         <div class="status-label incomplete-label d-flex"
                             *ngIf="product.total_images == 0 && product.product_image !== ''">
-                            <img src="/assets/images/incomplete_icon.svg" alt="" height="17px" width="17px" class="m-t-2">
+                            <img src="/assets/images/incomplete_icon.svg" alt="" height="17px" width="17px"
+                                class="m-t-2">
                             <span>incomplete</span>
                         </div>
                     </div>
@@ -85,7 +86,7 @@
                     <div class="d-flex j-end">
                         <div class="no-product-action-column d-flex c-pointer" *ngIf="product.product_image === ''"
                             (click)="addQrContentModal()">
-                            <span>Add QR Content</span>
+                            <span class="f-w-600">Add QR Content</span>
                             <img src="/assets/images/add_icon.svg" alt="" width="19px" height="19px">
                         </div>
                     </div>
@@ -93,8 +94,9 @@
             </tr>
         </tbody>
     </table>
-    <!-- <div class="d-flex m-t-10">
-        <img src="/assets/images/incomplete_icon.svg" alt="" height="20px" width="20px">
-        <span>incomplete QR codes are not available to download</span>
-    </div> -->
+</div>
+<div class="d-flex m-t-10 table-footer p-t-16">
+    <img src="/assets/images/info_icon.svg" alt="" height="20px" width="20px">
+    <span><i class="footer-text">Incomplete QR codes are not available to download, and your supplied signage will not
+            be available onsite at our service desk</i></span>
 </div>
