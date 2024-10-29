@@ -27,3 +27,7 @@ footer {
 .content {
     margin-top: 75px;
 }
+
+@media (min-width: 1200px) and (max-width: 1300px) {
+    
+}
