@@ -14,18 +14,6 @@ import { Router } from '@angular/router';
 })
 export class LeftSidebarComponent {
   selectedItem: string = 'dashboard';
-<<<<<<< HEAD
-  constructor(private dialogRef: MatDialogRef<LeftSidebarComponent>,private dialog: MatDialog,private router: Router) {}
-  selectItem(item: string) {
-    this.selectedItem = item;
-    if (this.selectedItem === 'contactUs') {
-      this.router.navigate(['/contactUs']);
-      this.dialogRef.close();
-    }else if(this.selectedItem === 'productList'){
-      this.router.navigate(['/productStickerList']);
-      this.dialogRef.close();
-    }
-=======
   constructor(private dialogRef: MatDialogRef<LeftSidebarComponent>,private dialog: MatDialog,private router: Router) {this.updateSelectedItem()}
 
 private updateSelectedItem() {
@@ -53,7 +41,6 @@ selectItem(item: string) {
     this.router.navigate(['/']); 
   }
   this.dialogRef.close();
->>>>>>> Feature/purchaseQR
 }
 printDownloadProductModal(selectedType:any):void{
   const dialogRef = this.dialog.open(PrintDownloadModalComponent, {
