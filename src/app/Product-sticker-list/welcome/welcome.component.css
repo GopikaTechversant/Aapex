@@ -24,7 +24,7 @@
 .print-selected {
   border: none;
   color: white;
-  background-color: rgb(210, 207, 207);
+  background-color: #d1d5db;
   width: 170px;
   height: 35px;
   border-radius: 5px;
@@ -35,9 +35,9 @@
 }
 .purchase-container {
   display: flex;
-  background-color: rgb(240, 239, 237);
+  background-color: #f3f4f6;
   padding: 15px;
-  border: 1px solid rgb(193, 192, 192);
+  border: 1px solid #d1d5db;
   border-radius: 5px;
   height: 100px;
   justify-content: space-between;
