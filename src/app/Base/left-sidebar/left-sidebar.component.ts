@@ -19,6 +19,10 @@ export class LeftSidebarComponent {
     this.selectedItem = item;
     if (this.selectedItem === 'contactUs') {
       this.router.navigate(['/contactUs']);
+      this.dialogRef.close();
+    }else if(this.selectedItem === 'productList'){
+      this.router.navigate(['/productStickerList']);
+      this.dialogRef.close();
     }
 }
 printDownloadProductModal(selectedType:any):void{

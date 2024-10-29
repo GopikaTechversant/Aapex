@@ -3,5 +3,6 @@ import { ProductStickerListPageComponent } from './Product-sticker-list/product-
 import { ContactUsComponent } from './contact-us/contact-us.component';
 export const routes: Routes = [
     {path:'',component: ProductStickerListPageComponent},
+    {path:'productStickerList',component: ProductStickerListPageComponent},
     {path:'contactUs',component: ContactUsComponent}
 ];
