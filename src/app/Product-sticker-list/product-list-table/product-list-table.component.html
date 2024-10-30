@@ -25,23 +25,23 @@
                     <div class="no-product-info">
                         <img src="/assets/images/warning-icon.png" alt="" width="24px" height="24px"
                             *ngIf="product.total_images == 0 ">
-                        <img src="/assets/images/product-sample.png" alt="Product Image" height="95px" width="92px"
+                        <img src="/assets/images/product-sample.png" alt="Product Image" height="109px" width="109px"
                             *ngIf="product.total_images !== 0 " />
                     </div>
                     <div class="product-info">
-                        <span class="product-name">{{ product.name }}</span>
+                        <span class="product-name">{{ product.sProductName }}</span>
                         <div class="d-flex image-count">
+                            <div class="image-count-box d-flex"><img src="/assets/images/image_icon.svg"><span>{{product.iImageFilesCount}}</span>
+                            </div>
                             <div class="image-count-box d-flex"><img src="/assets/images/video_icon.svg"
-                                    alt=""><span>1</span>
+                                alt=""><span>{{product.iVideoFilesCount}}</span>
                             </div>
-                            <div class="image-count-box d-flex"><img src="/assets/images/image_icon.svg"><span>1</span>
-                            </div>
-                            <div class="image-count-box d-flex"><img src="/assets/images/file_icon.svg"><span>1</span>
+                            <div class="image-count-box d-flex"><img src="/assets/images/file_icon.svg"><span>{{product.iOtherFilesCount}}</span>
                             </div>
                         </div>
                         <div class="d-flex f-column m-t-4 text-product-details">
-                            <span><i>{{ product.code }}</i></span>
-                            <span><i>Last updated: {{ product.lastUpdated }}</i></span>
+                            <span><i>{{ product.sProductCode }}</i></span>
+                            <span><i>Last updated: {{ formatDate(product.sLastUpdatedDateTime) }}</i></span>
                         </div>
                     </div>
                 </td>
@@ -63,7 +63,7 @@
                             <span>Ready for use</span>
                         </div>
                         <div class="status-label incomplete-label d-flex"
-                            *ngIf="product.total_images == 0 && product.product_image !== ''">
+                            *ngIf="product.iImageFilesCount == 0 && product.product_image !== ''">
                             <img src="/assets/images/incomplete_icon.svg" alt="" height="17px" width="17px"
                                 class="m-t-2">
                             <span>incomplete</span>
