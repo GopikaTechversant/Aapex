@@ -1,31 +1,47 @@
+<div *ngIf="loading" class="loader-overlay">
+  <img
+    src="../../assets/css/videos/Circle Loader.gif"
+    alt="Loading..."
+    class="loader-gif"
+  />
+</div>
+
 <div class="company-modal">
   <div class="search-bar">
-    <input type="text" placeholder="Search company name and reg id" />
+    <input
+      (input)="onSearchInput($event)"
+      type="text"
+      placeholder="Search company name and reg id"
+    />
     <button type="button">
       <img class="search-image" src="../../../assets/images/search.png" />
     </button>
   </div>
 
   <table>
-    <thead style="border-bottom: 1px solid rgb(225, 223, 223);">
+    <thead style="border-bottom: 1px solid rgb(225, 223, 223)">
       <tr>
         <th>Name</th>
         <th>Org ID / Reg ID</th>
         <th class="action">Action</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="!loading">
       <tr *ngFor="let company of company_list">
-        <td>{{ company.name }}</td>
+        <td>{{ company.sCompanyName }}</td>
         <td>
-          <select>
-            <option>{{ company.reg_Id }}</option>
-            <!-- Corrected here -->
+          <select #selectedRegId>
+            <option *ngFor="let user of company.users" [value]="user.iRegId">
+              {{ user.iRegId }}
+            </option>
           </select>
         </td>
-        <td class="action">
-          <img [src]="company.action" />
+        <td class="action" (click)="proceedCompany(selectedRegId.value, company)">
+          <img src="assets/images/right-arrow.png" />
         </td>
+      </tr>
+      <tr *ngIf="noRecordsFound">
+        <td colspan="3" style="text-align: center"><b>No records found</b></td>
       </tr>
     </tbody>
   </table>
