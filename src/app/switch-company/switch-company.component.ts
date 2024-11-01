@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { ApiServiceService } from '../services/api-service.service';
 import { Subject, debounceTime, switchMap } from 'rxjs';
-
+import { Router } from '@angular/router';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'app-switch-company',
   standalone: true,
@@ -17,7 +18,7 @@ export class SwitchCompanyComponent {
   searchValue: string = '';
   noRecordsFound: boolean = false;
 
-  constructor(private apiService: ApiServiceService) {
+  constructor(private apiService: ApiServiceService,private router: Router,private dialogRef: MatDialogRef<SwitchCompanyComponent>) {
     this.setupSearchSubscription(); 
   }
 
@@ -40,7 +41,12 @@ export class SwitchCompanyComponent {
 
       this.apiService.post(`/v1/exhibitor/user-data`, data).subscribe({
         next: (res: any) => {
-          console.log(res); 
+          const userId = res.user.iId;  
+          console.log("userId",userId);
+          
+          this.apiService.setUserId(userId); 
+          this.router.navigate(['/productStickerList']);
+          this.dialogRef.close();
         },
         error: () => {
         },

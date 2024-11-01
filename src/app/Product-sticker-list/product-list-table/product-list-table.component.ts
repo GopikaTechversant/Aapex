@@ -24,9 +24,8 @@ export class ProductListTableComponent implements OnInit {
   ngOnInit(): void {
     this.fetchStickerCount();
     this.apiService.get(`/v1/exhibitor/products?offset=1&pageCount=15&sortkey=1&sortvalue=ps.sCreatedDateTime&iStickerSetId=0&iAssignedFilter=2`).subscribe((res: any) => {
-     
       this.products_list = res?.productStickerBos;
-      console.log("tresponse", this.products_list);
+      console.log("tresponse", res);
     })
   
   }

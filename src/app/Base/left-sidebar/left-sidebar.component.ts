@@ -34,7 +34,7 @@ selectItem(item: string) {
   if (item === 'contactUs') {
     this.router.navigate(['/contactUs']);
   } else if (item === 'productList') {
-    this.router.navigate(['/productList']);
+    this.router.navigate(['/productStickerList']);
   } else if (item === 'printAll') {
     this.printDownloadProductModal('printAll');
   } else {
