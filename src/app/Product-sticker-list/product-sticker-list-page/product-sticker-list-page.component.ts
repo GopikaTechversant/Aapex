@@ -37,4 +37,9 @@ export class ProductStickerListPageComponent implements OnInit{
       this.products_list = this.products_list.slice(0, this.stickerCount);
     })
   }
+
+  refreshData(): void {
+    this.fetchProducts();
+    this.fetchStickerCount();
+  }
 }

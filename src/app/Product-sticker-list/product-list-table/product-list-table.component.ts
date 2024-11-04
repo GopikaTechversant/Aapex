@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PrintDownloadModalComponent } from '../print-download-modal/print-download-modal.component';
@@ -16,18 +16,10 @@ import { log } from 'console';
 })
 export class ProductListTableComponent implements OnInit {
   stickerCount: number = 0;
-  products_list: any[] = [
-    
-
-  ]
+  @Input() products_list: any[] = [];
   constructor(private dialog: MatDialog, private apiService: ApiServiceService,private datePipe: DatePipe) { }
   ngOnInit(): void {
-    this.fetchStickerCount();
-    this.apiService.get(`/v1/exhibitor/products?offset=1&pageCount=15&sortkey=1&sortvalue=ps.sCreatedDateTime&iStickerSetId=0&iAssignedFilter=2`).subscribe((res: any) => {
-      this.products_list = res?.productStickerBos;
-      console.log("tresponse", res);
-    })
-  
+    
   }
 
   printDownloadProductModal(selectedType: any): void {
@@ -46,16 +38,6 @@ export class ProductListTableComponent implements OnInit {
     const dialogRef = this.dialog.open(AddQrContentModalComponent, {
       width: '420px',
       height: '110px'
-    })
-  }
-
-  fetchStickerCount():void{
-    this.apiService.get(`/v1/exhibitor/sticker/count?name=&setId=0`).subscribe((res:any) => {
-      console.log("sticker",res.lPurchasedStickerCount);
-      this.stickerCount = res.lPurchasedStickerCount || 0;
-
-      // Filter or slice the products list based on the sticker count
-      this.products_list = this.products_list.slice(0, this.stickerCount);
     })
   }
 

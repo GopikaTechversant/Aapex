@@ -13,6 +13,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class SwitchCompanyComponent {
   private searchSubject = new Subject<string>();
+  
   company_list: any[] = [];
   loading: boolean = false;
   searchValue: string = '';
@@ -43,10 +44,11 @@ export class SwitchCompanyComponent {
         next: (res: any) => {
           const userId = res.user.iId;  
           console.log("userId",userId);
-          
           this.apiService.setUserId(userId); 
-          this.router.navigate(['/productStickerList']);
-          this.dialogRef.close();
+          
+          // this.router.navigate(['/productStickerList']).then(() => {
+            this.dialogRef.close();
+          // });
         },
         error: () => {
         },
