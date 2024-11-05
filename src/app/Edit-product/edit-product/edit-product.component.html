@@ -1,0 +1,60 @@
+<div class="main">
+    <div class="header">
+        <app-header></app-header>
+    </div>
+    <div>
+        <div class="edit-header">
+            <div class="d-flex p-10 p-l-0 f-s-16">
+                <div class="c-gray">
+                    <span class="p-5 p-l-0"><i class="fa fa-home" aria-hidden="true"></i></span>
+                    <span class="p-5"><a href="#" class="c-gray">Product List</a></span>
+                </div>
+                <div>
+                    <span class="p-5 c-gray f-w-500"> &gt; </span>
+                    <span class="p-5 c-blue">Edit Product</span>
+                </div>
+            </div>
+            <div>
+                <span class="heading">Edit QR Content</span>
+            </div>
+            <div class="d-flex">
+                <div>
+                    <img src="/assets/images/dummy_qr.svg" alt="QR Code" class="qr-code" />
+                </div>
+                <div class="">
+                    <div class="half-width">
+                        <span class="f-w-500 f-s-16 p-t-10">When scanned, this QR will show</span>
+                    </div>
+                    <div class="half-width switch-group d-flex">
+                        <label class="company-switch f-w-500">
+                            <input type="radio" name="qr-info" class="c-pointer" />
+                            &nbsp; Product Info
+                        </label>
+                        <label class="company-switch m-l-10">
+                            <input type="radio" name="qr-info" class="c-pointer" />
+                            <span class="f-w-500"> &nbsp; Company Info</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col">
+                    <span class="c-blue p-t-20">Use for NPS</span>
+                </div>
+                <div class="d-flex j-end button-group">
+                    <button class="btn-cancel">Cancel</button>
+                    <button class="btn-submit">Save & Update</button>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="half-width">
+                <app-company-detail></app-company-detail>
+            </div>
+            <div class="half-width">
+                <app-media-upload></app-media-upload>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <app-footer></app-footer>
+    </div>
+</div>
