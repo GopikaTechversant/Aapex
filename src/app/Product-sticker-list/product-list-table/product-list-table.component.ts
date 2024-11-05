@@ -19,7 +19,6 @@ export class ProductListTableComponent implements OnInit {
   @Input() products_list: any[] = [];
   constructor(private dialog: MatDialog, private apiService: ApiServiceService,private datePipe: DatePipe) { }
   ngOnInit(): void {
-    console.log("products_list in table",this.products_list);
     
   }
 
@@ -43,7 +42,7 @@ export class ProductListTableComponent implements OnInit {
   }
 
   formatDate(date: string | null): string {
-    return this.datePipe.transform(date, 'MMM d, y') || ''; // Format to 'Oct 11, 2024'
+    return this.datePipe.transform(date, 'MMM d, y') || ''; 
   }
 
   get rows() {
