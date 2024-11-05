@@ -45,4 +45,12 @@ export class ProductListTableComponent implements OnInit {
   formatDate(date: string | null): string {
     return this.datePipe.transform(date, 'MMM d, y') || ''; // Format to 'Oct 11, 2024'
   }
+
+  get rows() {
+    return Array.from({ length: this.stickerCount }, (_, i) => i + 1);
+  }
+
+  get hasEnoughProducts(): boolean {
+    return this.products_list.length >= this.stickerCount;
+  }
 }
