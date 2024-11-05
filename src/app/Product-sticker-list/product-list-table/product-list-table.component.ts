@@ -15,10 +15,11 @@ import { log } from 'console';
   styleUrl: './product-list-table.component.css'
 })
 export class ProductListTableComponent implements OnInit {
-  stickerCount: number = 0;
+  @Input() stickerCount: number = 0;
   @Input() products_list: any[] = [];
   constructor(private dialog: MatDialog, private apiService: ApiServiceService,private datePipe: DatePipe) { }
   ngOnInit(): void {
+    console.log("products_list in table",this.products_list);
     
   }
 

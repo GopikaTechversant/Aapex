@@ -4,11 +4,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { LeftSidebarComponent } from '../left-sidebar/left-sidebar.component';
 import { SwitchCompanyComponent } from '../../switch-company/switch-company.component';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [NgIf,SwitchCompanyComponent],
+  imports: [NgIf,SwitchCompanyComponent,CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
  
@@ -28,15 +29,19 @@ export class HeaderComponent implements OnInit{
     }
   }
   ngOnInit(): void {
+    console.log("header");
     
   }
+  
 
   get companyNameInitials(): string {
     return this.companyName
       .split(' ')
-      .map(word => word[0])
-      .join('');
+      .slice(0, 2) // Get the first two words
+      .map(word => word[0]) // Map to their first letters
+      .join(''); // Join the letters together
   }
+  
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
@@ -58,7 +63,11 @@ export class HeaderComponent implements OnInit{
     height: '450px',
     panelClass: 'custom-dialog'
   });
-  dialogRef.afterClosed().subscribe(() => {
+  dialogRef.afterClosed().subscribe((result: { name: string; id: number }) => {
+    if (result) {
+      this.companyName = result.name; // Update the company name
+      this.companyId = result.id; // Update the company ID
+    }
     this.companyChanged.emit();
   });
   this.isMenuOpen = !this.isMenuOpen;
