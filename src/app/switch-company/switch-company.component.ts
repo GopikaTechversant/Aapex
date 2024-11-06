@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { ApiServiceService } from '../services/api-service.service';
 import { Subject, debounceTime, switchMap } from 'rxjs';
-
+import { Router } from '@angular/router';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { log } from 'console';
 @Component({
   selector: 'app-switch-company',
   standalone: true,
@@ -12,12 +14,13 @@ import { Subject, debounceTime, switchMap } from 'rxjs';
 })
 export class SwitchCompanyComponent {
   private searchSubject = new Subject<string>();
+  
   company_list: any[] = [];
   loading: boolean = false;
   searchValue: string = '';
   noRecordsFound: boolean = false;
 
-  constructor(private apiService: ApiServiceService) {
+  constructor(private apiService: ApiServiceService,private router: Router,private dialogRef: MatDialogRef<SwitchCompanyComponent>) {
     this.setupSearchSubscription(); 
   }
 
@@ -26,6 +29,7 @@ export class SwitchCompanyComponent {
   }
   proceedCompany(selectedRegId: string, company: any) {
     const selectedUser = company.users.find((user: any) => user.iRegId === +selectedRegId); 
+  console.log("selectedUser",selectedUser);
   
     if (selectedUser) {
       const data = {
@@ -37,10 +41,19 @@ export class SwitchCompanyComponent {
         sHash: "D13E796F07B2652206DA6F04E74A23BD043C6F97EF1C45537831FE53C9F48924", 
         sTime: 1667349155588                
       };
+console.log("data",data);
 
       this.apiService.post(`/v1/exhibitor/user-data`, data).subscribe({
         next: (res: any) => {
-          console.log(res); 
+          const userId = res?.user?.iId;  
+          console.log("userId",userId);
+          this.apiService.setUserId(userId); 
+          
+          // this.router.navigate(['/productStickerList']).then(() => {
+            this.dialogRef.close({ name: company.sCompanyName, id: selectedUser.iRegId });
+            console.log("company.iRegId",company.iRegId);
+            
+          // });
         },
         error: () => {
         },

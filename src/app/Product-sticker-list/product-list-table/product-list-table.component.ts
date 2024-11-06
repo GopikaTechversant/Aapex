@@ -1,54 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PrintDownloadModalComponent } from '../print-download-modal/print-download-modal.component';
 import { AddQrContentModalComponent } from '../add-qr-content-modal/add-qr-content-modal.component';
 import { ApiServiceService } from '../../services/api-service.service';
+import { DatePipe } from '@angular/common';
+import { log } from 'console';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-product-list-table',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,DatePipe],
+  providers: [DatePipe],
   templateUrl: './product-list-table.component.html',
   styleUrl: './product-list-table.component.css'
 })
 export class ProductListTableComponent implements OnInit {
-
-  products_list: any[] = [
-    {
-      name: 'test product copy',
-      code: 'XQNF-08-055-23',
-      product_image: 'assets/images/product1.png',
-      // qrCode: 'assets/images/qr1.png',
-      lastUpdated: 'Oct 14, 2024',
-      total_images: 2,
-      total_videos: 3,
-      total_files: 0
-    },
-    {
-      name: '',
-      code: '',
-      product_image: '',
-      // qrCode: 'assets/images/qr1.png',
-      lastUpdated: 'Oct 14, 2024',
-    },
-    {
-      name: 'test product copy',
-      code: 'XQNF-08-055-23',
-      product_image: 'assets/images/product1.png',
-      // qrCode: 'assets/images/qr1.png',
-      lastUpdated: 'Oct 14, 2024',
-      total_images: 0,
-      total_videos: 0,
-      total_files: 0
-    }
-
-  ]
-  constructor(private dialog: MatDialog, private apiService: ApiServiceService) { }
+  @Input() stickerCount: number = 0;
+  @Input() products_list: any[] = [];
+  constructor(private dialog: MatDialog, private apiService: ApiServiceService,private datePipe: DatePipe,private router: Router) { }
   ngOnInit(): void {
-    this.apiService.get(`/v1/exhibitor/products?offset=1&pageCount=15&sortkey=1&sortvalue=ps.sCreatedDateTime&iStickerSetId=0&iAssignedFilter=2`).subscribe((res: any) => {
-      console.log("tresponse", res);
-
-    })
+    
   }
 
   printDownloadProductModal(selectedType: any): void {
@@ -59,9 +31,22 @@ export class ProductListTableComponent implements OnInit {
     });
   }
 
-  editProduct(): void {
+  // editProduct(): void {
 
+  // }
+  editProduct(id: number, index: number): void {
+    // Use router to navigate with parameters
+    this.router.navigate(['/edit'], {
+      queryParams: {
+        id: id,
+        p: 2,
+        editEnable: 0,
+        index: index,
+        addContent: 0
+      }
+    });
   }
+
 
   addQrContentModal(): void {
     const dialogRef = this.dialog.open(AddQrContentModalComponent, {
@@ -70,4 +55,15 @@ export class ProductListTableComponent implements OnInit {
     })
   }
 
+  formatDate(date: string | null): string {
+    return this.datePipe.transform(date, 'MMM d, y') || ''; 
+  }
+
+  get rows() {
+    return Array.from({ length: this.stickerCount }, (_, i) => i + 1);
+  }
+
+  get hasEnoughProducts(): boolean {
+    return this.products_list.length >= this.stickerCount;
+  }
 }
