@@ -23,14 +23,14 @@
         </label>
       </div>
       <div *ngIf="selectedType === 'print' || selectedType === 'printAll'">
-        <label [class.active]="selectedFormat === '2X2'" class="d-flex align-center">
-          <input type="radio" name="format" value="2X2" [(ngModel)]="selectedFormat" />
+        <label [class.active]="selectedFormat === 'TWOX2_FORMAT'" class="d-flex align-center">
+          <input type="radio" name="format" value="TWOX2_FORMAT" [(ngModel)]="selectedFormat" />
           <span class="p-l-4 text-color">2X2 Format</span>
         </label>
       </div>
       <div *ngIf="selectedType === 'print' || selectedType === 'printAll'">
-        <label [class.active]="selectedFormat === '5x7'" class="d-flex align-center">
-          <input type="radio" name="format" value="5x7" [(ngModel)]="selectedFormat" />
+        <label [class.active]="selectedFormat === 'FIVEX7_FORMAT'" class="d-flex align-center">
+          <input type="radio" name="format" value="FIVEX7_FORMAT" [(ngModel)]="selectedFormat" />
           <span class="p-l-4 text-color">5x7 Format</span>
         </label>
       </div>

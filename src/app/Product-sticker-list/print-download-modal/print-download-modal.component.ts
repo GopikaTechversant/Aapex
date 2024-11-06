@@ -2,64 +2,81 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
-import jsPDF from 'jspdf';
+import { ApiServiceService } from '../../services/api-service.service';
 
 @Component({
   selector: 'app-print-download-modal',
   standalone: true,
   imports: [FormsModule, NgIf],
   templateUrl: './print-download-modal.component.html',
-  styleUrls: ['./print-download-modal.component.css'], // Corrected 'styleUrl' to 'styleUrls'
+  styleUrls: ['./print-download-modal.component.css'],
 })
 export class PrintDownloadModalComponent implements OnInit {
   selectedFormat: string = '';
   selectedType: string = '';
+  type: string = '';
 
   constructor(
+    private apiService: ApiServiceService,
     private dialogRef: MatDialogRef<PrintDownloadModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
+
   ngOnInit(): void {
     this.selectedType = this.data;
-    if (this.selectedType === 'print')
-      this.selectedFormat = '2X2'; // This should match the radio button value
-    else if (this.selectedType === 'download') this.selectedFormat = 'svg';
-  }
-
-  openImageInPdf(imageUrl: string, width: number, height: number) {
-    const pdf = new jsPDF();
-
-    const pageWidth = pdf.internal.pageSize.getWidth();
-    const pageHeight = pdf.internal.pageSize.getHeight();
-
-    const img = new Image();
-    img.src = imageUrl;
-    img.onload = () => {
-      const imgWidth = width * 72; // Convert inches to points
-      const imgHeight = height * 72;
-
-      const xPos = (pageWidth - imgWidth) / 2;
-      const yPos = (pageHeight - imgHeight) / 2;
-
-      pdf.addImage(img, 'JPEG', xPos, yPos, imgWidth, imgHeight);
-      pdf.output('dataurlnewwindow');
-    };
+    if (this.selectedType === 'print') {
+      this.selectedFormat = 'TWOX2_FORMAT';
+    } else if (this.selectedType === 'download') {
+      this.selectedFormat = 'svg'; 
+    }
   }
 
   onSubmit(): void {
-    if (this.selectedType === 'print') {
-      if (this.selectedFormat === '2X2') {
-        // Match the value used in the radio button
-        this.openImageInPdf('assets/images/image_icon.png', 2, 2);
-      } else if (this.selectedFormat === '5x7') {
-        // Match the value used in the radio button
-        this.openImageInPdf('assets/images/image_icon.png', 5, 7);
-      }
-    } else if (this.selectedType === 'download') {
-      this.openImageInPdf('assets/images/image_icon.png', 2, 2); // Example: default dimensions for downloads
-    }
+    const data = {
+      productIds: [10270] 
+    };
 
-    this.dialogRef.close();
+    const format = this.selectedType === 'download' ? 'TWOX2_FORMAT' : this.selectedFormat;
+    const type = this.selectedType === 'download' ? this.selectedFormat : 'PDF';
+
+    this.apiService.post(
+      `/v1/exhibitor/print-product-sticker?loc_id=1&format=${format}&type=${type.toUpperCase()}&is_expo=1&show_code=C`,
+      data
+    ).subscribe({
+      next: (res: any) => {
+        const qrCodeUrl = res?.sStickerPdf;
+        if (this.selectedType === 'download' && qrCodeUrl) {
+          this.downloadFileDirectly(qrCodeUrl, type);
+        } else if (this.selectedType === 'print' && res?.sStickerPdf) {
+          window.open(res.sStickerPdf, '_blank');
+        }
+      },
+      error: () => {
+      },
+      complete: () => {
+        this.dialogRef.close();
+      },
+    });
+  }
+
+  async downloadFileDirectly(url: string, type: string): Promise<void> {
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      const downloadUrl = URL.createObjectURL(blob);
+
+      const link = document.createElement('a');
+      link.href = downloadUrl;
+      link.download = type === 'svg' ? 'qrcode.svg' : 'qrcode.jpeg';
+      document.body.appendChild(link);
+      link.click();
+
+      
+      URL.revokeObjectURL(downloadUrl);
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error('Error downloading file:', error);
+    }
   }
 
   close(): void {
