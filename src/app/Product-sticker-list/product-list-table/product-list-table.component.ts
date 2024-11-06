@@ -27,8 +27,7 @@ export class ProductListTableComponent implements OnInit {
     const dialogRef = this.dialog.open(PrintDownloadModalComponent, {
       width: '500px',
       height: '200px',
-      data: selectedType,
-      id:id
+      data: { selectedType, id }
     });
   }
 

@@ -15,7 +15,7 @@ export class PrintDownloadModalComponent implements OnInit {
   selectedFormat: string = '';
   selectedType: string = '';
   type: string = '';
-
+  id: any;
   constructor(
     private apiService: ApiServiceService,
     private dialogRef: MatDialogRef<PrintDownloadModalComponent>,
@@ -23,7 +23,7 @@ export class PrintDownloadModalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.selectedType = this.data;
+    this.selectedType = this.data.selectedType;
     if (this.selectedType === 'print') {
       this.selectedFormat = 'TWOX2_FORMAT';
     } else if (this.selectedType === 'download') {
@@ -32,10 +32,16 @@ export class PrintDownloadModalComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const data = {
-      productIds: [10270] 
-    };
+    let productIds = this.data.id; 
 
+  if (!Array.isArray(productIds)) {
+    productIds = [productIds];
+  }
+
+  const data = {
+    productIds: productIds 
+  };
+ 
     const format = this.selectedType === 'download' ? 'TWOX2_FORMAT' : this.selectedFormat;
     const type = this.selectedType === 'download' ? this.selectedFormat : 'PDF';
 
