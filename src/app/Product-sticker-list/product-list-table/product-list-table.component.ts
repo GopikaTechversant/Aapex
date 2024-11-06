@@ -23,11 +23,12 @@ export class ProductListTableComponent implements OnInit {
     
   }
 
-  printDownloadProductModal(selectedType: any): void {
+  printDownloadProductModal(selectedType: any,id:any): void {
     const dialogRef = this.dialog.open(PrintDownloadModalComponent, {
       width: '500px',
       height: '200px',
-      data: selectedType
+      data: selectedType,
+      id:id
     });
   }
 

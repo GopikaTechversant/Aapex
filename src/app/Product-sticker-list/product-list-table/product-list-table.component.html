@@ -74,12 +74,12 @@
                     </td>
                     <td>
                         <div class="d-flex action-column" *ngIf="products_list[i].iImageFilesCount !== ''">
-                            <span class="d-flex action-box c-pointer" (click)="printDownloadProductModal('print')"><img
+                            <span class="d-flex action-box c-pointer" (click)="printDownloadProductModal('print',products_list[i].iId)"><img
                                     src="/assets/images/print_icon.svg" alt="" height="20px"
                                     width="20px"><span>Print</span>
                             </span>
                             <span class="d-flex action-box c-pointer"
-                                (click)="printDownloadProductModal('download')"><img
+                                (click)="printDownloadProductModal('download',products_list[i].iId)"><img
                                     src="/assets/images/download_icon.svg" alt="" height="20px"
                                     width="20px"><span>Download QR</span>
                             </span>
