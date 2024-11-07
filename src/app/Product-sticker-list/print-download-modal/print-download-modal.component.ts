@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
@@ -12,6 +12,7 @@ import { ApiServiceService } from '../../services/api-service.service';
   styleUrls: ['./print-download-modal.component.css'],
 })
 export class PrintDownloadModalComponent implements OnInit {
+  @Output() processingStatusChange = new EventEmitter<{ productId: number; isProcessing: boolean }>();
   selectedFormat: string = '';
   selectedType: string = '';
   type: string = '';
@@ -33,6 +34,7 @@ export class PrintDownloadModalComponent implements OnInit {
 
   onSubmit(): void {
     let productIds = this.data.id; 
+    this.processingStatusChange.emit({ productId: productIds, isProcessing: true })
 
   if (!Array.isArray(productIds)) {
     productIds = [productIds];
@@ -61,6 +63,7 @@ export class PrintDownloadModalComponent implements OnInit {
       },
       complete: () => {
         this.dialogRef.close();
+        this.processingStatusChange.emit({ productId:productIds, isProcessing: false });
       },
     });
   }
