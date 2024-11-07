@@ -76,12 +76,14 @@
                         <div class="d-flex action-column" *ngIf="products_list[i].iImageFilesCount !== ''">
                             <span class="d-flex action-box c-pointer" (click)="printDownloadProductModal('print',products_list[i].iId)"><img
                                     src="/assets/images/print_icon.svg" alt="" height="20px"
-                                    width="20px"><span>Print</span>
+                                    width="20px"> <span *ngIf="processingStatus[products_list[i].iId] !== 'print'">Print</span>
+                                    <span *ngIf="processingStatus[products_list[i].iId] === 'print'">Processing...</span>
                             </span>
                             <span class="d-flex action-box c-pointer"
                                 (click)="printDownloadProductModal('download',products_list[i].iId)"><img
                                     src="/assets/images/download_icon.svg" alt="" height="20px"
-                                    width="20px"><span>Download QR</span>
+                                    width="20px"><span *ngIf="processingStatus[products_list[i].iId] !== 'download'">Download QR</span>
+                                    <span *ngIf="processingStatus[products_list[i].iId] === 'download'">Processing...</span>
                             </span>
                             <span class="d-flex action-box c-pointer" (click)="editProduct(products_list[i].iId,products_list[i])"><img
                                     src="/assets/images/edit_icon.svg" alt="" height="20px"

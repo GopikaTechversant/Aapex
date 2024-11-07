@@ -18,6 +18,7 @@ import { Router } from '@angular/router';
 export class ProductListTableComponent implements OnInit {
   @Input() stickerCount: number = 0;
   @Input() products_list: any[] = [];
+  processingStatus: { [productId: number]: string | null } = {};
   constructor(private dialog: MatDialog, private apiService: ApiServiceService,private datePipe: DatePipe,private router: Router) { }
   ngOnInit(): void {
     
@@ -29,13 +30,15 @@ export class ProductListTableComponent implements OnInit {
       height: '200px',
       data: { selectedType, id }
     });
-  }
+      dialogRef.componentInstance.processingStatusChange.subscribe((isProcessing: boolean) => {
+        this.processingStatus[id] = isProcessing ? selectedType : null;
+      });
+      dialogRef.afterClosed().subscribe(() => {
+        this.processingStatus[id] = null; 
+      });
+    }
 
-  // editProduct(): void {
-
-  // }
   editProduct(id: number, index: number): void {
-    // Use router to navigate with parameters
     this.router.navigate(['/edit'], {
       queryParams: {
         id: id,
