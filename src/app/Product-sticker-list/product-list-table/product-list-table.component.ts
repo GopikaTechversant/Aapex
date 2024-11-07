@@ -1,16 +1,18 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule,  } from '@angular/common';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PrintDownloadModalComponent } from '../print-download-modal/print-download-modal.component';
 import { AddQrContentModalComponent } from '../add-qr-content-modal/add-qr-content-modal.component';
 import { ApiServiceService } from '../../services/api-service.service';
 import { DatePipe } from '@angular/common';
 import { log } from 'console';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ColorStateService } from '../../services/color-state.service';
 @Component({
   selector: 'app-product-list-table',
   standalone: true,
-  imports: [CommonModule,DatePipe],
+  imports: [CommonModule,DatePipe,FormsModule],
   providers: [DatePipe],
   templateUrl: './product-list-table.component.html',
   styleUrl: './product-list-table.component.css'
@@ -18,11 +20,27 @@ import { Router } from '@angular/router';
 export class ProductListTableComponent implements OnInit {
   @Input() stickerCount: number = 0;
   @Input() products_list: any[] = [];
-  constructor(private dialog: MatDialog, private apiService: ApiServiceService,private datePipe: DatePipe,private router: Router) { }
+  constructor(private colorStateService: ColorStateService,private dialog: MatDialog, private apiService: ApiServiceService,private datePipe: DatePipe,private router: Router) { }
   ngOnInit(): void {
     
   }
-
+  isAllChecked: boolean = false;
+  toggleAllCheckboxes(checked: boolean) {
+    this.isAllChecked = checked;
+    this.products_list.forEach((product, index) => {
+      product.isChecked = checked;
+    });
+    this.updateButtonColor();
+  }
+  updateButtonColor() {
+    const anyChecked = this.products_list.some(product => product.isChecked);
+    // If any checkbox is checked, change the button color
+    this.colorStateService.buttonColor.set(anyChecked ? '#476df8' : '#d1d5db');
+  }
+  onIndividualCheckboxChange() {
+  this.isAllChecked = this.products_list.every(product => product.isChecked);
+  this.updateButtonColor();
+}
   printDownloadProductModal(selectedType: any,id:any): void {
     const dialogRef = this.dialog.open(PrintDownloadModalComponent, {
       width: '500px',

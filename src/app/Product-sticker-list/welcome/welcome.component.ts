@@ -1,19 +1,24 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PurchaseQRComponent } from '../../purchase-qr/purchase-qr.component';
+import { ColorStateService } from '../../services/color-state.service';
+import { NgStyle } from '@angular/common';
 @Component({
   selector: 'app-welcome',
   standalone: true,
-  imports: [],
+  imports: [NgStyle],
   templateUrl: './welcome.component.html',
   styleUrl: './welcome.component.css',
 })
 
 export class WelcomeComponent implements OnInit{
   @Input() stickerCount:number = 0;
-  constructor(private dialog: MatDialog) {}
+  constructor(private colorStateService: ColorStateService,private dialog: MatDialog) {}
   ngOnInit(): void {
     
+  }
+  get buttonColor(): string {
+    return this.colorStateService.buttonColor();
   }
   qrCount = 4;
   purchaseQR() {

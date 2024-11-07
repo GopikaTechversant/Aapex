@@ -2,7 +2,7 @@
     <table class="product-table">
         <thead>
             <tr>
-                <th class="d-flex check-box p-l-15"><span>All</span><input type="checkbox" /></th>
+                <th class="d-flex check-box p-l-15"><span>All</span><input type="checkbox" [(ngModel)]="isAllChecked" (change)="toggleAllCheckboxes(isAllChecked)" /></th>
                 <th>No.</th>
                 <th class="text-center qr-head">QR CODE</th>
                 <th class="text-left">CONTENT</th>
@@ -13,7 +13,7 @@
         <tbody>
             <!-- Loop based on stickerCount -->
             <tr *ngFor="let row of rows; let i = index">
-                <td class="p-l-17"><input type="checkbox" *ngIf="products_list[i]" /></td>
+                <td class="p-l-17"><input type="checkbox" [(ngModel)]="products_list[i].isChecked" (change)="onIndividualCheckboxChange()" *ngIf="products_list[i]" /></td>
                 <td>{{ (i + 1) | number: '2.0' }}</td>
 
                 <!-- Display product details if available -->
