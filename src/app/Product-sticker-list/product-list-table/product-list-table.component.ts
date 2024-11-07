@@ -21,7 +21,7 @@ export class ProductListTableComponent implements OnInit {
   @Input() stickerCount: number = 0;
   @Input() products_list: any[] = [];
   processingStatus: { [productId: number]: string | null } = {};
-  constructor(private colorStateService: ColorStateService,,private dialog: MatDialog, private apiService: ApiServiceService,private datePipe: DatePipe,private router: Router) { }
+  constructor(private colorStateService: ColorStateService,private dialog: MatDialog, private apiService: ApiServiceService,private datePipe: DatePipe,private router: Router) { }
   ngOnInit(): void {
     
   }
