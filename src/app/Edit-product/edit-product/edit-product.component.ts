@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { FooterComponent } from '../../Base/footer/footer.component';
 import { HeaderComponent } from '../../Base/header/header.component';
 import { LeftSidebarComponent } from '../../Base/left-sidebar/left-sidebar.component';
@@ -15,6 +15,7 @@ import { log } from 'console';
   styleUrl: './edit-product.component.css'
 })
 export class EditProductComponent implements OnInit{
+  infoTypeSignal:WritableSignal<string> = signal('company info');
   constructor( private apiService: ApiServiceService,private route: ActivatedRoute){}
   ngOnInit(): void {
     this.fetchCompanyDetails();
@@ -29,6 +30,10 @@ export class EditProductComponent implements OnInit{
       })
     }
    
+  }
+
+  onInfoTypeChange(type:string):void{
+    this.infoTypeSignal.set(type);
   }
 
 }

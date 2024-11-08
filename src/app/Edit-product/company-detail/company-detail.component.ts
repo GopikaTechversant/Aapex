@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Signal, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-company-detail',
@@ -11,7 +11,7 @@ export class CompanyDetailComponent implements OnInit{
   @ViewChild('comment') commentDiv!: ElementRef<HTMLDivElement>;
   companyDescription:any;
   description: any;
-  
+  @Input() infoTypeSignal!: Signal<string>;
   ngOnInit(): void {
   }
 
