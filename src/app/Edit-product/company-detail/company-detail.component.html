@@ -1,1 +1,50 @@
-<p>company-detail works!</p>
+<div class="main">
+    <div class="container d-flex f-column">
+        <span><span class="required">*</span>{{ infoTypeSignal() === 'Product Info' ? 'Product Name' : 'Company Name' }}</span>
+        <div class="company-name"><span class="p-l-11 name-text">Test out company</span>
+            
+        </div>
+        <div><span class="required">*</span>{{ infoTypeSignal() === 'Product Info' ? 'Product description' : 'Company description' }}</div>
+        <div class="editor-container">
+            <div class="toolbar">
+                <button onclick="execCommand('bold')"><b>B</b></button>
+                <button onclick="execCommand('italic')"><img src="/assets/images/italic_icon.svg" class="c-pointer" alt=""
+                    height="10px" width="23px"></button>
+                <button onclick="execCommand('underline')"><u>U</u></button>
+                <select onchange="formatBlock(this.value)">
+                    <option value="p">Normal text</option>
+                    <option value="h1">Heading 1</option>
+                    <option value="h2">Heading 2</option>
+                </select>
+                <button onclick="execCommand('insertUnorderedList')"><img src="/assets/images/list.svg" class="c-pointer" alt=""
+                    height="26px" width="26px"></button>
+                <button onclick="execCommand('insertOrderedList')"><img src="/assets/images/ordered_list.svg" class="c-pointer" alt=""
+                    height="26px" width="26px"></button>
+            </div>
+            <div id="editor" contenteditable="true" class="editor-content"></div>
+        </div>
+        <div>{{ infoTypeSignal() === 'Product Info' ? 'Product Specifications' : 'Additional Information' }}</div>
+        <div class="editor-container">
+            <div class="toolbar">
+                <button onclick="execCommand('bold')"><b>B</b></button>
+                <button onclick="execCommand('italic')"><img src="/assets/images/italic_icon.svg" class="c-pointer" alt=""
+                    height="10px" width="23px"></button>
+                <button onclick="execCommand('underline')"><u>U</u></button>
+                <select onchange="formatBlock(this.value)">
+                    <option value="p">Normal text</option>
+                    <option value="h1">Heading 1</option>
+                    <option value="h2">Heading 2</option>
+                </select>
+                <button onclick="execCommand('insertUnorderedList')"><img src="/assets/images/list.svg" class="c-pointer" alt=""
+                    height="26px" width="26px"></button>
+                <button onclick="execCommand('insertOrderedList')"><img src="/assets/images/ordered_list.svg" class="c-pointer" alt=""
+                    height="26px" width="26px"></button>
+            </div>
+            <div id="editor" contenteditable="true" class="editor-content"></div>
+        </div>
+        <div class="d-flex m-t-10 table-footer p-t-16">
+            <img src="/assets/images/info_icon.svg" alt="" height="20px" width="20px">
+            <span class="p-l-5"><span class="required">*</span><i class="footer-text">Required for QR to be used</i></span>
+        </div>
+    </div>
+</div>
