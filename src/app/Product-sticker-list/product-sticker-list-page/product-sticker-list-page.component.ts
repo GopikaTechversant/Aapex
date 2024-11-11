@@ -5,20 +5,28 @@ import { LeftSidebarComponent } from '../../Base/left-sidebar/left-sidebar.compo
 import { WelcomeComponent } from '../welcome/welcome.component';
 import { ProductListTableComponent } from '../product-list-table/product-list-table.component';
 import { ApiServiceService } from '../../services/api-service.service';
-
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { log } from 'console';
 @Component({
   selector: 'app-product-sticker-list-page',
   standalone: true,
-  imports: [HeaderComponent,FooterComponent,LeftSidebarComponent,WelcomeComponent,ProductListTableComponent],
+  imports: [HeaderComponent,FooterComponent,WelcomeComponent,ProductListTableComponent],
   templateUrl: './product-sticker-list-page.component.html',
   styleUrl: './product-sticker-list-page.component.css'
 })
 export class ProductStickerListPageComponent implements OnInit{
   stickerCount: number = 0;
   products_list : WritableSignal<any[]> = signal([]);
-  constructor(private apiService: ApiServiceService){}
+  userRole: any;
+  constructor(private apiService: ApiServiceService,private route: ActivatedRoute){}
   ngOnInit(): void {
     this.fetchProducts();
+    // this.route.queryParams.subscribe((params:any) => {
+    //   this.userRole = params['role'] || 'Guest'; 
+    //   console.log('User Role:', this.userRole);
+    // });
+     this.userRole = this.apiService.getUserRole();
   }
 
   fetchProducts():void{
@@ -32,12 +40,9 @@ export class ProductStickerListPageComponent implements OnInit{
   fetchStickerCount(): void {
     this.apiService.get(`/v1/exhibitor/sticker/count?name=&setId=0`)
       .subscribe((res: any) => {
-        console.log("sticker", res.lPurchasedStickerCount);
         this.stickerCount = res.lPurchasedStickerCount || 0;
         const updatedList = this.products_list().slice(0, this.stickerCount);  
         this.products_list.set(updatedList);  
-        console.log( " this.products_list",this.products_list());
-        
       });
   }
 

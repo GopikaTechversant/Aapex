@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-left-sidebar',
   standalone: true,
-  imports: [NgClass,PrintDownloadModalComponent],
+  imports: [NgClass],
   templateUrl: './left-sidebar.component.html',
   styleUrls: ['./left-sidebar.component.css'], 
  

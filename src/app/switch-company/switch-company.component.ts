@@ -10,49 +10,41 @@ import { log } from 'console';
   standalone: true,
   imports: [NgFor, NgIf],
   templateUrl: './switch-company.component.html',
-  styleUrls: ['./switch-company.component.css'], 
+  styleUrls: ['./switch-company.component.css'],
 })
 export class SwitchCompanyComponent {
   private searchSubject = new Subject<string>();
-  
+
   company_list: any[] = [];
   loading: boolean = false;
   searchValue: string = '';
   noRecordsFound: boolean = false;
 
-  constructor(private apiService: ApiServiceService,private router: Router,private dialogRef: MatDialogRef<SwitchCompanyComponent>) {
-    this.setupSearchSubscription(); 
+  constructor(private apiService: ApiServiceService, private router: Router, private dialogRef: MatDialogRef<SwitchCompanyComponent>) {
+    this.setupSearchSubscription();
   }
 
   ngOnInit() {
     this.loadCompanies();
   }
   proceedCompany(selectedRegId: string, company: any) {
-    const selectedUser = company.users.find((user: any) => user.iRegId === +selectedRegId); 
-  console.log("selectedUser",selectedUser);
-  
+    const selectedUser = company.users.find((user: any) => user.iRegId === +selectedRegId);
     if (selectedUser) {
       const data = {
         iRegId: selectedUser.iRegId,
-        sEventId: selectedUser.event.sEventId,     
-        sShow: selectedUser.event.show,            
-        sOrgId: selectedUser.companyMaster.sOrgId,                      
-        sRole: selectedUser.userRoles.sName,         
-        sHash: "D13E796F07B2652206DA6F04E74A23BD043C6F97EF1C45537831FE53C9F48924", 
-        sTime: 1667349155588                
+        sEventId: selectedUser.event.sEventId,
+        sShow: selectedUser.event.show,
+        sOrgId: selectedUser.companyMaster.sOrgId,
+        sRole: selectedUser.userRoles.sName,
+        sHash: "D13E796F07B2652206DA6F04E74A23BD043C6F97EF1C45537831FE53C9F48924",
+        sTime: 1667349155588
       };
-console.log("data",data);
-
       this.apiService.post(`/v1/exhibitor/user-data`, data).subscribe({
         next: (res: any) => {
-          const userId = res?.user?.iId;  
-          console.log("userId",userId);
-          this.apiService.setUserId(userId); 
-          
+          const userId = res?.user?.iId;
+          this.apiService.setUserId(userId);
           // this.router.navigate(['/productStickerList']).then(() => {
-            this.dialogRef.close({ name: company.sCompanyName, id: selectedUser.iRegId });
-            console.log("company.iRegId",company.iRegId);
-            
+          this.dialogRef.close({ name: company.sCompanyName, id: selectedUser.iRegId });
           // });
         },
         error: () => {
@@ -64,8 +56,8 @@ console.log("data",data);
       console.error("User not found with the selected registration ID");
     }
   }
-  
-  
+
+
   loadCompanies() {
     this.loading = true;
     this.apiService.get(`/v1/exhibitor/users`).subscribe({
@@ -74,7 +66,7 @@ console.log("data",data);
         this.noRecordsFound = this.company_list.length === 0;
       },
       error: () => {
-        this.loading = false; 
+        this.loading = false;
       },
       complete: () => {
         this.loading = false;
@@ -88,7 +80,7 @@ console.log("data",data);
         debounceTime(300),
         switchMap((searchValue) => {
           if (searchValue.trim() === '') {
-            this.loadCompanies(); 
+            this.loadCompanies();
             return [];
           }
           const url = `/v1/exhibitor/search-users?searchValue=${searchValue}`;
@@ -98,8 +90,8 @@ console.log("data",data);
       .subscribe({
         next: (res: any) => {
           this.company_list = res.companyBos;
-          this.noRecordsFound = this.company_list.length === 0; 
-          this.loading = false; 
+          this.noRecordsFound = this.company_list.length === 0;
+          this.loading = false;
         },
         error: () => {
           this.loading = false;
@@ -108,10 +100,10 @@ console.log("data",data);
   }
 
   onSearchInput(event: Event) {
-    const target = event.target as HTMLInputElement; 
-    this.searchValue = target.value; 
-    this.loading = true; 
-    this.noRecordsFound = false; 
-    this.searchSubject.next(this.searchValue); 
+    const target = event.target as HTMLInputElement;
+    this.searchValue = target.value;
+    this.loading = true;
+    this.noRecordsFound = false;
+    this.searchSubject.next(this.searchValue);
   }
 }

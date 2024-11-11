@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [NgIf,SwitchCompanyComponent,CommonModule],
+  imports: [NgIf,CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
  
@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit{
   @Input() stickerCount:number = 0;
   @Output() companyChanged = new EventEmitter<void>();
   @Input() products_list: any[] = [];
+  @Input() userRole:any;
   companyName = '31 INCORPORATED';
   companyId = 4610743;
   isMenuOpen :boolean = false;
@@ -29,7 +30,6 @@ export class HeaderComponent implements OnInit{
     }
   }
   ngOnInit(): void {
-    console.log("header");
     
   }
   
@@ -48,7 +48,6 @@ export class HeaderComponent implements OnInit{
   }
 
   logout() {
-    console.log('Logout clicked');
   }
   openModal() {
     const dialogRef = this.dialog.open(LeftSidebarComponent, {

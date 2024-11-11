@@ -30,7 +30,7 @@
                     </div>
 
                     <div class="menu-options">
-                        <div class="menu-item" (click)="switchCompany()">
+                        <div class="menu-item" (click)="switchCompany()" *ngIf="userRole === 'onStaff'">
                             <img src="/assets/images/switch-company.png" alt="" height="24px" width="24px"
                                 class="c-pointer">
                             <span class="p-l-10 c-pointer"> Switch Company</span>

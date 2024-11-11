@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CommonModule,  } from '@angular/common';
+import { CommonModule, } from '@angular/common';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PrintDownloadModalComponent } from '../print-download-modal/print-download-modal.component';
 import { AddQrContentModalComponent } from '../add-qr-content-modal/add-qr-content-modal.component';
@@ -12,7 +12,7 @@ import { ColorStateService } from '../../services/color-state.service';
 @Component({
   selector: 'app-product-list-table',
   standalone: true,
-  imports: [CommonModule,DatePipe,FormsModule],
+  imports: [CommonModule, FormsModule],
   providers: [DatePipe],
   templateUrl: './product-list-table.component.html',
   styleUrl: './product-list-table.component.css'
@@ -20,12 +20,20 @@ import { ColorStateService } from '../../services/color-state.service';
 export class ProductListTableComponent implements OnInit {
   @Input() stickerCount: number = 0;
   @Input() products_list: any[] = [];
+  @Input() userRole:any;
   processingStatus: { [productId: number]: string | null } = {};
-  constructor(private colorStateService: ColorStateService,private dialog: MatDialog, private apiService: ApiServiceService,private datePipe: DatePipe,private router: Router) { }
-  ngOnInit(): void {
-    
-  }
   isAllChecked: boolean = false;
+  isNps: number = 0;
+  isNpsChecked: boolean = false;
+  constructor(private colorStateService: ColorStateService, private dialog: MatDialog, private apiService: ApiServiceService, private datePipe: DatePipe, private router: Router) { }
+  ngOnInit(): void {
+console.log("userRole",this.userRole);
+this.products_list.forEach((data:any) => {
+  console.log(" this.products_list",data);
+  if(data?.iIsCompany === 0 && data?.iIsNps === 1) this.isNps = 1;
+})
+  }
+
   toggleAllCheckboxes(checked: boolean) {
     this.isAllChecked = checked;
     this.products_list.forEach((product, index) => {
@@ -39,23 +47,23 @@ export class ProductListTableComponent implements OnInit {
     this.colorStateService.buttonColor.set(anyChecked ? '#476df8' : '#d1d5db');
   }
   onIndividualCheckboxChange() {
-  this.isAllChecked = this.products_list.every(product => product.isChecked);
-  this.updateButtonColor();
-}
-  printDownloadProductModal(selectedType: any,id:any): void {
+    this.isAllChecked = this.products_list.every(product => product.isChecked);
+    this.updateButtonColor();
+  }
+  printDownloadProductModal(selectedType: any, id: any): void {
     const dialogRef = this.dialog.open(PrintDownloadModalComponent, {
       width: '500px',
       height: '200px',
       data: { selectedType, id }
     });
-      dialogRef.componentInstance.processingStatusChange.subscribe((isProcessing: boolean) => {
-        this.processingStatus[id] = isProcessing ? selectedType : null;
-      });
-      dialogRef.afterClosed().subscribe(() => {
-        this.processingStatus[id] = null; 
-      });
-    }
-  
+    dialogRef.componentInstance.processingStatusChange.subscribe((isProcessing: boolean) => {
+      this.processingStatus[id] = isProcessing ? selectedType : null;
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.processingStatus[id] = null;
+    });
+  }
+
 
   editProduct(id: number, index: number): void {
     // Use router to navigate with parameters
@@ -79,7 +87,7 @@ export class ProductListTableComponent implements OnInit {
   }
 
   formatDate(date: string | null): string {
-    return this.datePipe.transform(date, 'MMM d, y') || ''; 
+    return this.datePipe.transform(date, 'MMM d, y') || '';
   }
 
   get rows() {
@@ -89,4 +97,19 @@ export class ProductListTableComponent implements OnInit {
   get hasEnoughProducts(): boolean {
     return this.products_list.length >= this.stickerCount;
   }
+
+  onCheckboxChange(product: any): void {
+    const payload = {
+      iUserId: product.createdUserId
+    };
+    if (product.isNpsChecked) {
+      this.isNps = 1;
+    } else this.isNps = 0;
+    this.apiService.post(`/v1/exhibitor/add-nps?productId=${product.iId}&isNps=${this.isNps}`, payload).subscribe(
+      (res: any) => {
+        console.log("API response:", res);
+      }
+    );
+  }
+
 }
