@@ -211,6 +211,11 @@ tr {
     min-width: 164px;
 }
 
+.readonly-checkbox {
+    pointer-events: none; 
+    opacity: 1; 
+  }
+  
 
 @media (min-width: 1200px) and (max-width: 1300px) {
     .product-table-container {

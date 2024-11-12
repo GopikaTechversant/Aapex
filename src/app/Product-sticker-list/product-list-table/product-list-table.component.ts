@@ -20,18 +20,16 @@ import { ColorStateService } from '../../services/color-state.service';
 export class ProductListTableComponent implements OnInit {
   @Input() stickerCount: number = 0;
   @Input() products_list: any[] = [];
-  @Input() userRole:any;
+  @Input() userRole: any;
   processingStatus: { [productId: number]: string | null } = {};
   isAllChecked: boolean = false;
   isNps: number = 0;
   isNpsChecked: boolean = false;
   constructor(private colorStateService: ColorStateService, private dialog: MatDialog, private apiService: ApiServiceService, private datePipe: DatePipe, private router: Router) { }
   ngOnInit(): void {
-console.log("userRole",this.userRole);
-this.products_list.forEach((data:any) => {
-  console.log(" this.products_list",data);
-  if(data?.iIsCompany === 0 && data?.iIsNps === 1) this.isNps = 1;
-})
+    this.products_list.forEach((data: any) => {
+      data.isNpsChecked = data.iIsCompany === 0 && data.iIsNps === 1;
+    })
   }
 
   toggleAllCheckboxes(checked: boolean) {
@@ -43,7 +41,6 @@ this.products_list.forEach((data:any) => {
   }
   updateButtonColor() {
     const anyChecked = this.products_list.some(product => product.isChecked);
-    // If any checkbox is checked, change the button color
     this.colorStateService.buttonColor.set(anyChecked ? '#476df8' : '#d1d5db');
   }
   onIndividualCheckboxChange() {
@@ -66,7 +63,6 @@ this.products_list.forEach((data:any) => {
 
 
   editProduct(id: number, index: number): void {
-    // Use router to navigate with parameters
     this.router.navigate(['/edit'], {
       queryParams: {
         id: id,
@@ -99,15 +95,17 @@ this.products_list.forEach((data:any) => {
   }
 
   onCheckboxChange(product: any): void {
+    console.log("product.createdUserId",product);
+    
     const payload = {
-      iUserId: product.createdUserId
+      iUserId: product.thumbnail?.createdUser?.iId
     };
     if (product.isNpsChecked) {
       this.isNps = 1;
     } else this.isNps = 0;
     this.apiService.post(`/v1/exhibitor/add-nps?productId=${product.iId}&isNps=${this.isNps}`, payload).subscribe(
       (res: any) => {
-        console.log("API response:", res);
+        console.log("API response:", payload);
       }
     );
   }

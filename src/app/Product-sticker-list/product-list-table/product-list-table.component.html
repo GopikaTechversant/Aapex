@@ -55,13 +55,26 @@
                     </td>
                     <td class="showcase-column">
                         <div class="d-flex j-space align-center">
-                            <div class="d-flex" *ngIf="userRole === 'onStaff'" >
-                                <input type="checkbox"  [(ngModel)]="products_list[i].isNpsChecked" 
-                                (change)="onCheckboxChange(products_list[i])" >
+                            <div class="d-flex" *ngIf="userRole === 'onStaff'">
+                                <input
+                                    type="checkbox"
+                                    [(ngModel)]="products_list[i].isNpsChecked"
+                                    (change)="onCheckboxChange(products_list[i])"
+                                />
+                                <span
+                                    *ngIf="products_list[i].isNpsChecked"
+                                    class="product-showcase"
+                                >
+                                    New Product Showcase
+                                </span>
+                            </div>
+                            
+                            <div class="d-flex" *ngIf="userRole !== 'onStaff'" >
+                                <input type="checkbox" [checked]="products_list[i].iIsCompany === 0 &&  products_list[i].iIsNps === 1" class="readonly-checkbox"
+                                *ngIf="products_list[i].isNpsChecked || products_list[i].iIsCompany === 0 &&  products_list[i].iIsNps === 1">
                                 <span *ngIf="products_list[i].isNpsChecked || products_list[i].iIsCompany === 0 &&  products_list[i].iIsNps === 1" class="product-showcase"
                                 >New Product Showcase</span>
                             </div>
-                            
                             <div class="status-label d-flex"
                                 [ngClass]="products_list[i].iIsReady === 1 ? 'ready-label' : 'incomplete-label'">
                                 <img src="/assets/images/ready_icon.svg" alt="" height="20px" width="20px" *ngIf="products_list[i].iIsReady === 1"/>
