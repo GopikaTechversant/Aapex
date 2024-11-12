@@ -55,8 +55,10 @@ export class ProductListTableComponent implements OnInit {
         this.processingStatus[id] = null; 
       });
     }
+  
 
   editProduct(id: number, index: number): void {
+    // Use router to navigate with parameters
     this.router.navigate(['/edit'], {
       queryParams: {
         id: id,
