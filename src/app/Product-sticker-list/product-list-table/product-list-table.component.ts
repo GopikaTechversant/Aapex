@@ -78,7 +78,8 @@ export class ProductListTableComponent implements OnInit {
   addQrContentModal(): void {
     const dialogRef = this.dialog.open(AddQrContentModalComponent, {
       width: '420px',
-      height: '110px'
+      // height: '110px',
+      data: this.products_list
     })
   }
 
