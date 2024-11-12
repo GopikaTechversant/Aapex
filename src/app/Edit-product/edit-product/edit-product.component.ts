@@ -10,7 +10,7 @@ import { log } from 'console';
 @Component({
   selector: 'app-edit-product',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, LeftSidebarComponent, CompanyDetailComponent, MediaUploadComponent],
+  imports: [HeaderComponent, FooterComponent, CompanyDetailComponent, MediaUploadComponent],
   templateUrl: './edit-product.component.html',
   styleUrl: './edit-product.component.css'
 })
@@ -24,12 +24,9 @@ export class EditProductComponent implements OnInit{
   fetchCompanyDetails():void{
     const productId = this.route.snapshot.queryParamMap.get('id');
     if(productId){
-      console.log("productId",productId);
       this.apiService.get(`/v1/exhibitor/product?productid=${productId}`).subscribe((res:any) => {
-        console.log("res",res);
       })
     }
-   
   }
 
   onInfoTypeChange(type:string):void{

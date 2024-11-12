@@ -2,7 +2,8 @@
     <table class="product-table">
         <thead>
             <tr>
-                <th class="d-flex check-box p-l-15"><span>All</span><input type="checkbox" [(ngModel)]="isAllChecked" (change)="toggleAllCheckboxes(isAllChecked)" /></th>
+                <th class="d-flex check-box p-l-15"><span>All</span><input type="checkbox" [(ngModel)]="isAllChecked"
+                        (change)="toggleAllCheckboxes(isAllChecked)" /></th>
                 <th>No.</th>
                 <th class="text-center qr-head">QR CODE</th>
                 <th class="text-left">CONTENT</th>
@@ -13,7 +14,8 @@
         <tbody>
             <!-- Loop based on stickerCount -->
             <tr *ngFor="let row of rows; let i = index">
-                <td class="p-l-17"><input type="checkbox" [(ngModel)]="products_list[i].isChecked" (change)="onIndividualCheckboxChange()" *ngIf="products_list[i]" /></td>
+                <td class="p-l-17"><input type="checkbox" [(ngModel)]="products_list[i].isChecked"
+                        (change)="onIndividualCheckboxChange()" *ngIf="products_list[i]" /></td>
                 <td>{{ (i + 1) | number: '2.0' }}</td>
 
                 <!-- Display product details if available -->
@@ -21,8 +23,8 @@
                     <td>
                         <div class="d-flex product-content">
                             <img src="/assets/images/dummy_qr.svg" alt="QR Code" class="qr-code" />
-                            <span *ngIf="products_list[i].iImageFilesCount !== ''" class="content-button">Product
-                                Content</span>
+                            <span *ngIf="products_list[i].iImageFilesCount !== ''" class="content-button">{{
+                                products_list[i].iIsCompany === 0 ? 'Product Content' : 'Company Content' }}</span>
                         </div>
                     </td>
                     <td class="content-column " *ngIf="products_list[i].iImageFilesCount !== ''">
@@ -53,39 +55,51 @@
                     </td>
                     <td class="showcase-column">
                         <div class="d-flex j-space align-center">
-                            <div class="d-flex">
-                                <input type="checkbox" />
-                                <span *ngIf="products_list[i].iImageFilesCount !== ''" class="product-showcase">New
-                                    Product
-                                    Showcase</span>
+                            <div class="d-flex" *ngIf="userRole === 'onStaff'">
+                                <input
+                                    type="checkbox"
+                                    [(ngModel)]="products_list[i].isNpsChecked"
+                                    (change)="onCheckboxChange(products_list[i])"
+                                />
+                                <span
+                                    *ngIf="products_list[i].isNpsChecked"
+                                    class="product-showcase"
+                                >
+                                    New Product Showcase
+                                </span>
                             </div>
-                            <div class="status-label ready-label d-flex"
-                                *ngIf="products_list[i].iImageFilesCount !== 0 && products_list[i].iImageFilesCount !== ''">
-                                <img src="/assets/images/ready_icon.svg" alt="" height="20px" width="20px">
-                                <span>Ready for use</span>
+                            
+                            <div class="d-flex" *ngIf="userRole !== 'onStaff'" >
+                                <input type="checkbox" [checked]="products_list[i].iIsCompany === 0 &&  products_list[i].iIsNps === 1" class="readonly-checkbox"
+                                *ngIf="products_list[i].isNpsChecked || products_list[i].iIsCompany === 0 &&  products_list[i].iIsNps === 1">
+                                <span *ngIf="products_list[i].isNpsChecked || products_list[i].iIsCompany === 0 &&  products_list[i].iIsNps === 1" class="product-showcase"
+                                >New Product Showcase</span>
                             </div>
-                            <div class="status-label incomplete-label d-flex"
-                                *ngIf="products_list[i].iImageFilesCount == 0 && products_list[i].iImageFilesCount !== ''">
+                            <div class="status-label d-flex"
+                                [ngClass]="products_list[i].iIsReady === 1 ? 'ready-label' : 'incomplete-label'">
+                                <img src="/assets/images/ready_icon.svg" alt="" height="20px" width="20px" *ngIf="products_list[i].iIsReady === 1"/>
                                 <img src="/assets/images/incomplete_icon.svg" alt="" height="17px" width="17px"
-                                    class="m-t-2">
-                                <span>incomplete</span>
+                                    class="m-t-2" *ngIf="products_list[i].iIsReady === 0">
+                                <span>{{ products_list[i]?.iIsReady === 1 ? 'Ready for use' : 'Incomplete' }}</span>
                             </div>
                         </div>
                     </td>
                     <td>
                         <div class="d-flex action-column" *ngIf="products_list[i].iImageFilesCount !== ''">
-                            <span class="d-flex action-box c-pointer" (click)="printDownloadProductModal('print',products_list[i].iId)"><img
-                                    src="/assets/images/print_icon.svg" alt="" height="20px"
-                                    width="20px"> <span *ngIf="processingStatus[products_list[i].iId] !== 'print'">Print</span>
-                                    <span *ngIf="processingStatus[products_list[i].iId] === 'print'">Processing...</span>
+                            <span class="d-flex action-box c-pointer"
+                                (click)="printDownloadProductModal('print',products_list[i].iId)"><img
+                                    src="/assets/images/print_icon.svg" alt="" height="20px" width="20px"> <span
+                                    *ngIf="processingStatus[products_list[i].iId] !== 'print'">Print</span>
+                                <span *ngIf="processingStatus[products_list[i].iId] === 'print'">Processing...</span>
                             </span>
                             <span class="d-flex action-box c-pointer"
                                 (click)="printDownloadProductModal('download',products_list[i].iId)"><img
-                                    src="/assets/images/download_icon.svg" alt="" height="20px"
-                                    width="20px"><span *ngIf="processingStatus[products_list[i].iId] !== 'download'">Download QR</span>
-                                    <span *ngIf="processingStatus[products_list[i].iId] === 'download'">Processing...</span>
+                                    src="/assets/images/download_icon.svg" alt="" height="20px" width="20px"><span
+                                    *ngIf="processingStatus[products_list[i].iId] !== 'download'">Download QR</span>
+                                <span *ngIf="processingStatus[products_list[i].iId] === 'download'">Processing...</span>
                             </span>
-                            <span class="d-flex action-box c-pointer" (click)="editProduct(products_list[i].iId,products_list[i])"><img
+                            <span class="d-flex action-box c-pointer"
+                                (click)="editProduct(products_list[i].iId,products_list[i])"><img
                                     src="/assets/images/edit_icon.svg" alt="" height="20px"
                                     width="20px"><span>Edit</span></span>
                         </div>

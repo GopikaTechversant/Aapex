@@ -9,12 +9,16 @@ import { log } from 'console';
 })
 export class ApiServiceService {
   private userid: number = 2450;
+  userRole:any;
   constructor(private http: HttpClient) {}
 
   setUserId(newUserId: number): void {
     this.userid = newUserId; 
-    console.log("this.userid",this.userid);
-    
+  }
+
+  getUserRole(): void{
+    this.userRole = 'onStaff';
+    return this.userRole;
   }
 
   private createHeaders(): HttpHeaders {
@@ -24,7 +28,8 @@ export class ApiServiceService {
       hash: `${token}`,
       time: 1667349155588,
       userid: this.userid,
-      loggedInUserId:2194
+      loggedInUserId:2194,
+      
     });
     
   }
