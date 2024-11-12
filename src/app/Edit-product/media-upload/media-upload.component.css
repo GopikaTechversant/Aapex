@@ -1,0 +1,122 @@
+.upload-media-container {
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+  color: #333;
+}
+.upload-click {
+  color: rgb(79, 142, 224);
+}
+.upload-media-container h2 {
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
+}
+.file-type {
+  padding: 0 20px;
+  color: #aaa;
+}
+.upload-from-computer,
+.add-via-link,
+.uploaded-media {
+  margin-bottom: 1.5em;
+}
+
+.upload-from-computer label,
+.add-via-link label {
+  font-weight: bold;
+}
+
+.upload-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #dedcdc;
+  border-radius: 5px;
+  padding: 1em;
+  text-align: center;
+  cursor: pointer;
+  margin-top: 0.5em;
+}
+.upload-container {
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.upload-container.dragover {
+  border-color: #333;
+  background-color: #f0f0f0;
+}
+
+.upload-icon {
+  margin-bottom: 10px;
+}
+
+.upload-icon {
+  font-size: 2em;
+  color: #666;
+  margin: 0 auto;
+  border: 1px solid rgb(201, 200, 200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.add-via-link .link-options button {
+  background-color: #f5f5f5;
+  border: none;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  margin-right: 0.5em;
+  border-radius: 4px;
+}
+
+.add-via-link .link-options .active {
+  background-color: #4f8fdf;
+  color: white;
+}
+
+.add-via-link input {
+  width: calc(100% - 70px);
+  padding: 0.5em;
+  margin-top: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.add-via-link button {
+  padding: 0.5em 1em;
+  background-color: #4f8fdf;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.uploaded-media h3 {
+  font-size: 1em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+.image-list,
+.video-list {
+  display: flex;
+  gap: 0.5em;
+}
+
+.image-item,
+.video-item {
+  width: 80px;
+  height: 80px;
+  background-color: #eee;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaa;
+  font-size: 0.8em;
+}

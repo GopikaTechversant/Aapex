@@ -1,1 +1,45 @@
-<p>media-upload works!</p>
+<div>
+  <h2><b>Upload Media</b></h2>
+  <p>
+    Upload your content from your computer or via links. An
+    <strong><i>image</i></strong> is required but
+    <strong><i>videos</i></strong> and <strong><i>documents</i></strong> are
+    optional.
+  </p>
+</div>
+<div class="upload-from-computer">
+  <label>Upload from computer</label>
+  <div class="upload-box">
+    <div
+      class="upload-container"
+      (click)="onUploadClick()"
+      (dragover)="onDragOver($event)"
+      (drop)="onDrop($event)"
+    >
+      <input
+        type="file"
+        hidden
+        #fileInput
+        (change)="onFilesSelected($event)"
+        multiple
+      />
+      <div class="upload-icon">
+        <img
+          style="width: 30px; height: 30px"
+          src="../../../assets/images/upload.png"
+        />
+      </div>
+      <p style="color: #c6c6c6;">
+        <span class="upload-click"><b>Click to upload</b></span> or drag and
+        drop
+      </p>
+      <div class="file-type">
+        <p>
+          SVG, PNG, JPEG (max size 15MB) & MP4, MOV (max size 200MB) & PDF, DOC,
+          DOCX, HTML, TXT
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
