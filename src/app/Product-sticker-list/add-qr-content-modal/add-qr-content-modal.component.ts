@@ -23,6 +23,7 @@ export class AddQrContentModalComponent implements OnInit{
   }
 
    editProduct(id: number, index: number): void {
+   console.log("id",id);
    
     this.router.navigate(['/edit'], {
       queryParams: {

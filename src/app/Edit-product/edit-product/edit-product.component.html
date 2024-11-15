@@ -27,11 +27,11 @@
                     </div>
                     <div class="half-width switch-group d-flex">
                         <label class="company-switch f-w-500">
-                            <input type="radio" name="qr-info" class="c-pointer" (change)="onInfoTypeChange('Product Info')"/>
+                            <input type="radio" name="qr-info" class="c-pointer" (change)="onInfoTypeChange('Product Info')" [checked]="productDetail?.productStickers?.iIsCompany === 0"/>
                             &nbsp; Product Info
                         </label>
                         <label class="company-switch m-l-10">
-                            <input type="radio" name="qr-info" class="c-pointer" (change)="onInfoTypeChange('Company Info')"/>
+                            <input type="radio" name="qr-info" class="c-pointer" (change)="onInfoTypeChange('Company Info')" [checked]="productDetail?.productStickers?.iIsCompany === 1"/>
                             <span class="f-w-500"> &nbsp; Company Info</span>
                         </label>
                     </div>
@@ -47,7 +47,7 @@
         </div>
         <div class="content">
             <div class="half-width">
-                <app-company-detail [infoTypeSignal]="infoTypeSignal"></app-company-detail>
+                <app-company-detail [infoTypeSignal]="infoTypeSignal" [productDetail]="productDetail"></app-company-detail>
             </div>
             <div class="half-width">
                 <app-media-upload></app-media-upload>

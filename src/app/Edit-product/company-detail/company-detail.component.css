@@ -49,6 +49,7 @@
     height: 40px;
     padding: 9px 2px;
     border-radius: 5px;
+    outline: none;
 }
 
 .required{
@@ -61,4 +62,33 @@
 
 select:focus{
   outline: none !important;
+}
+
+.select {
+  outline: none;
+  border-radius: 3px;
+  background-color: white;
+  border: 1px solid #E6E6E6;
+  width: 106px;
+  padding-left: 2px;
+  text-align: left;
+  height: 27px;
+}
+
+.toolbar button {
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  margin: 2px;
+  color: black;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.toolbar button:active {
+  background-color: red;
+}
+
+.toolbar button[style*="background-color: blue"] {
+  color: white; 
 }

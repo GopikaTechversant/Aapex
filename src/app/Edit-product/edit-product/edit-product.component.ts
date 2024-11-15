@@ -15,7 +15,8 @@ import { log } from 'console';
   styleUrl: './edit-product.component.css'
 })
 export class EditProductComponent implements OnInit{
-  infoTypeSignal:WritableSignal<string> = signal('company info');
+  infoTypeSignal: WritableSignal<string> = signal('');
+  productDetail:any;
   constructor( private apiService: ApiServiceService,private route: ActivatedRoute){}
   ngOnInit(): void {
     this.fetchCompanyDetails();
@@ -23,8 +24,18 @@ export class EditProductComponent implements OnInit{
 
   fetchCompanyDetails():void{
     const productId = this.route.snapshot.queryParamMap.get('id');
+    console.log("productId",productId);
+    
     if(productId){
       this.apiService.get(`/v1/exhibitor/product?productid=${productId}`).subscribe((res:any) => {
+        this.productDetail = res;
+        console.log("this.productDetail",this.productDetail);
+        if (this.productDetail?.productStickers?.iIsCompany === 0) {
+          this.infoTypeSignal.set('Product Info');
+        } else {
+          this.infoTypeSignal.set('Company Info');
+        }
+        
       })
     }
   }
